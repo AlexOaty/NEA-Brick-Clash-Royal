@@ -11,11 +11,6 @@ public class SceneSwitcher : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
-    public void CreateAccount()
-    {
-        SceneManager.LoadScene(2);
-    }
-
     public void Quit()
     {
       
@@ -28,11 +23,11 @@ public class SceneSwitcher : MonoBehaviour
 
     public void Settings()
     {
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(2);
     }
 
     public void Register()
     {
-        SceneManager.LoadScene(4);
+        SceneManager.LoadScene(3);
     }
 }
