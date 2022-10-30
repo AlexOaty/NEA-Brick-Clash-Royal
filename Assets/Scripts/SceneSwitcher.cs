@@ -15,7 +15,6 @@ public class SceneSwitcher : MonoBehaviour
     {
       
     }
-
     public void Menu()
     {
         SceneManager.LoadScene(0);
