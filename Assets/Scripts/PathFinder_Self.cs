@@ -7,23 +7,38 @@ public class PathFinder_Self : MonoBehaviour
 {
     Seeker seeker;
     Rigidbody2D rb;
-    public Transform target;
+    public Vector3 target;
     public float speed = 100f;
     public float pointDistance = 3f;
     bool EndOfPath = false;
     int currentWaypoint = 0;
     Path path;
+    Vector3 NewTarget;
     // Start is called before the first frame update
     void Start()
     {
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
         InvokeRepeating("UpdatePath", 0f, 0.5f);
+        
     }
-
+    
     void UpdatePath()
     {
-        path = seeker.StartPath(rb.position, target.position);
+        if (rb.position.y <= -0.15)
+	    {
+            if (rb.position.x <= 0)
+                NewTarget = new Vector3(-0.3f, -0.15f, 0f);
+
+            else
+                NewTarget = new Vector3(0.4f, -0.15f, 0f);
+	    }
+        else
+	    {
+            NewTarget = target;
+	    }
+
+        path = seeker.StartPath(rb.position, NewTarget);
         currentWaypoint = 0;
     }
 
