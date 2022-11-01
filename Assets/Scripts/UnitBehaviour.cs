@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class UnitBehaviour : MonoBehaviour 
+public class UnitBehaviour
 {
 
-    public GameObject Unit;
+    private GameObject Unit;
 
     public UnitBehaviour(GameObject Unit)
     {
