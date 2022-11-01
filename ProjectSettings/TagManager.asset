@@ -6,6 +6,10 @@ TagManager:
   tags:
   - UserName
   - Password
+  - Path
+  - PlayerUnit
+  - EnemyUnit
+  - Boundary
   layers:
   - Default
   - TransparentFX

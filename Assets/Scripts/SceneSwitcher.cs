@@ -6,27 +6,12 @@ using UnityEngine.UI;
 
 public class SceneSwitcher : MonoBehaviour
 {
-    public void Login()
-    {
-        SceneManager.LoadScene(1);
-    }
-
     public void Quit()
     {
       
     }
-    public void Menu()
+    public void LoadScene(string Scene)
     {
-        SceneManager.LoadScene(0);
-    }
-
-    public void Settings()
-    {
-        SceneManager.LoadScene(2);
-    }
-
-    public void Register()
-    {
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(Scene);
     }
 }
