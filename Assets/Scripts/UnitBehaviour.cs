@@ -17,6 +17,7 @@ public class UnitBehaviour
     GameObject Bottom;
     GameObject Top;
     bool OnPath;
+    public bool EndOfPath;
 
     public UnitBehaviour(GameObject Unit, Rigidbody2D rb, float speed, bool IsEnemy)
     {
@@ -28,18 +29,26 @@ public class UnitBehaviour
 
     public void FollowPath()
     {
+        EndOfPath = false;
         float distance;
         Vector3 direction;
         GameObject target;
-        if (!IsEnemy)
-            target = Bottom;
-        else
-            target = Top;
-        distance = Vector3.Distance(Unit.transform.position, target.transform.position);
-        if(distance > 0.1)
+        if (!OnPath)
         {
-            direction = target.transform.position - Unit.transform.position;
-            rb.AddForce(direction * distance * speed);
+            if (!IsEnemy)
+                target = Bottom;
+            else
+                target = Top;
+            distance = Vector3.Distance(Unit.transform.position, target.transform.position);
+            if (distance > 0.1)
+            {
+                direction = target.transform.position - Unit.transform.position;
+                rb.AddForce(direction * distance * speed);
+            }
+            else
+            {
+                OnPath = true;
+            }
         }
         else
         {
@@ -50,17 +59,11 @@ public class UnitBehaviour
             distance = Vector3.Distance(Unit.transform.position, target.transform.position);
             direction = target.transform.position - Unit.transform.position;
             rb.AddForce(direction * distance * speed);
+            if (distance < 0.1)
+            {
+                EndOfPath = true;
+            }
         }
-        //if (OnPath)
-        //{
-        //    if (!IsEnemy)
-        //        target = Top;
-        //    else
-        //        target = Bottom;
-        //    distance = Vector3.Distance(Unit.transform.position, target.transform.position);
-        //    direction = target.transform.position - Unit.transform.position;
-        //    rb.AddForce(direction * distance * speed);
-        //}
 
     }
 
