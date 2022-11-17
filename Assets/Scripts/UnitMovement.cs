@@ -23,7 +23,13 @@ public class UnitMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!mUnit.EndOfPath)
+        if (!mUnit.EndOfPath && !mUnit.Fighting)
+        {
             mUnit.FollowPath();
+            mUnit.Fighting = mUnit.CheckArea();
+        }
+        else if (mUnit.Fighting)
+            mUnit.AttackUnit();
+        
     }
 }

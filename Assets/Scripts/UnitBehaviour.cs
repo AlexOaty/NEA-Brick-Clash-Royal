@@ -18,6 +18,9 @@ public class UnitBehaviour
     GameObject Top;
     bool OnPath;
     public bool EndOfPath;
+    public bool Fighting;
+    GameObject[] Opponents;
+    GameObject CurrentOpponent;
 
     public UnitBehaviour(GameObject Unit, Rigidbody2D rb, float speed, bool IsEnemy)
     {
@@ -43,7 +46,7 @@ public class UnitBehaviour
             if (distance > 0.1)
             {
                 direction = target.transform.position - Unit.transform.position;
-                rb.AddForce(direction * distance * speed);
+                rb.AddForce(direction * speed);
             }
             else
             {
@@ -58,7 +61,7 @@ public class UnitBehaviour
                 target = Bottom;
             distance = Vector3.Distance(Unit.transform.position, target.transform.position);
             direction = target.transform.position - Unit.transform.position;
-            rb.AddForce(direction * distance * speed);
+            rb.AddForce(direction * speed);
             if (distance < 0.1)
             {
                 EndOfPath = true;
@@ -99,5 +102,38 @@ public class UnitBehaviour
             Top = PathBounds[0];
             Bottom = PathBounds[1];
         }
+    }
+    public bool CheckArea()
+    {
+        bool InRange = false;
+        Opponents = GameObject.FindGameObjectsWithTag("Unit");
+        CurrentOpponent = Opponents[0];
+        foreach (GameObject opponent in Opponents)
+        {
+            float CheckDist = Vector3.Distance(Unit.transform.position, opponent.transform.position);
+            if (CheckDist <= 0.3 && opponent != Unit)
+            {
+                InRange = true;
+            }
+        }
+        if (InRange == false)
+        {
+            return false;
+        }
+        else
+        {
+            foreach (GameObject opponent in Opponents)
+            {
+                float CheckDist = Vector3.Distance(Unit.transform.position, opponent.transform.position);
+                float CurrentDist = Vector3.Distance(Unit.transform.position, CurrentOpponent.transform.position);
+                if (CheckDist < CurrentDist && opponent != Unit)
+                    CurrentOpponent = opponent;
+            }
+        }
+        return true;
+    }
+    public void AttackUnit()
+    {
+
     }
 }
