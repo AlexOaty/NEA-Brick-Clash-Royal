@@ -20,7 +20,7 @@ public class UnitBehaviour
     public bool EndOfPath;
     public bool Fighting;
     GameObject[] Opponents;
-    GameObject CurrentOpponent;
+    public GameObject CurrentOpponent;
     public float Health;
     public float Damage;
     public float AttackSpeed;
@@ -57,9 +57,7 @@ public class UnitBehaviour
                 rb.AddForce(direction / distance * speed);
             }
             else
-            {
                 OnPath = true;
-            }
         }
         else
         {
@@ -147,14 +145,15 @@ public class UnitBehaviour
                 if (CheckDist < CurrentDist && opponent != Unit)
                 {
                     CurrentOpponent = opponent;
-                    AttackUnit();
+                    Fighting = true;
                 }
             }
         }
         return true;
     }
-    public void AttackUnit()
-    {
-        
-    }
+
+    //public void AttackUnit()
+    //{
+    //    Debug.Log($"{Unit.tag} Attacking");
+    //}
 }
