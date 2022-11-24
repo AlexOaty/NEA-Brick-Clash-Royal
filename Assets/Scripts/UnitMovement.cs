@@ -11,12 +11,15 @@ public class UnitMovement : MonoBehaviour
     Rigidbody2D Rigidbody;
     public float speed;
     public bool IsEnemy;
+    public float Health;
+    public float Damage;
+    public float AttackSpeed;
     // Start is called before the first frame update
     void Start()
     {
         Unit = gameObject;
         Rigidbody = GetComponent<Rigidbody2D>();
-        mUnit = new UnitBehaviour(Unit, Rigidbody, speed, IsEnemy);
+        mUnit = new UnitBehaviour(Unit, Rigidbody, speed, IsEnemy, Health, Damage, AttackSpeed);
         Path = mUnit.FindPath();
     }
 

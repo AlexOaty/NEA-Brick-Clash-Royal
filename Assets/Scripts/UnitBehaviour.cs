@@ -11,7 +11,7 @@ public class UnitBehaviour
     protected GameObject PathToFollow;
     protected Rigidbody2D rb;
     protected float speed;
-    protected bool IsEnemy;
+    bool IsEnemy;
     GameObject[] Paths;
     GameObject[] PathBounds;
     GameObject Bottom;
@@ -21,13 +21,19 @@ public class UnitBehaviour
     public bool Fighting;
     GameObject[] Opponents;
     GameObject CurrentOpponent;
+    public float Health;
+    public float Damage;
+    public float AttackSpeed;
 
-    public UnitBehaviour(GameObject Unit, Rigidbody2D rb, float speed, bool IsEnemy)
+    public UnitBehaviour(GameObject Unit, Rigidbody2D rb, float speed, bool IsEnemy, float Health, float Damage, float AttackSpeed)
     {
         this.Unit = Unit;
         this.rb = rb;
         this.speed = speed;
         this.IsEnemy = IsEnemy;
+        this.Health = Health;
+        this.Damage = Damage;
+        this.AttackSpeed = AttackSpeed;
     }
 
     public void FollowPath()
@@ -36,6 +42,8 @@ public class UnitBehaviour
         float distance;
         Vector3 direction;
         GameObject target;
+
+        //Checks if unit is on path, if the unit is on the path it will move along the path. If not, it will move to their end of the path
         if (!OnPath)
         {
             if (!IsEnemy)
@@ -43,10 +51,10 @@ public class UnitBehaviour
             else
                 target = Top;
             distance = Vector3.Distance(Unit.transform.position, target.transform.position);
-            if (distance > 0.1)
+            if (distance > 0.05)
             {
                 direction = target.transform.position - Unit.transform.position;
-                rb.AddForce(direction * speed);
+                rb.AddForce(direction / distance * speed);
             }
             else
             {
@@ -61,7 +69,7 @@ public class UnitBehaviour
                 target = Bottom;
             distance = Vector3.Distance(Unit.transform.position, target.transform.position);
             direction = target.transform.position - Unit.transform.position;
-            rb.AddForce(direction * speed);
+            rb.AddForce(direction / distance * speed);
             if (distance < 0.1)
             {
                 EndOfPath = true;
@@ -72,6 +80,7 @@ public class UnitBehaviour
 
     public GameObject FindPath()
     {
+        // Finds the two path objects in the arena and finds the closest path to the unit, which the unit will follow
         Paths = GameObject.FindGameObjectsWithTag("Path");
         float PathDistance0 = Vector3.Distance(Unit.transform.position, Paths[0].transform.position);
         float PathDistance1 = Vector3.Distance(Unit.transform.position, Paths[1].transform.position);
@@ -92,6 +101,7 @@ public class UnitBehaviour
     }
     private void FindBounds()
     {
+        //Finds the top and bottom of the path
         if (PathBounds[0].transform.position.y < 0)
         {
             Top = PathBounds[1];
@@ -105,11 +115,19 @@ public class UnitBehaviour
     }
     public bool CheckArea()
     {
+        //Checks the units area for any enemy units and stops the unit if they are in range
         bool InRange = false;
-        Opponents = GameObject.FindGameObjectsWithTag("Unit");
+
+        if(IsEnemy)
+            Opponents = GameObject.FindGameObjectsWithTag("UnitPlayer");
+        else
+            Opponents = GameObject.FindGameObjectsWithTag("UnitEnemy");
+
+        //Opponents = GameObject.FindGameObjectsWithTag("Unit");
         CurrentOpponent = Opponents[0];
         foreach (GameObject opponent in Opponents)
         {
+            //UnitBehaviour unitBehaviour = opponent.GetComponent<UnitBehaviour>();
             float CheckDist = Vector3.Distance(Unit.transform.position, opponent.transform.position);
             if (CheckDist <= 0.3 && opponent != Unit)
             {
@@ -127,13 +145,16 @@ public class UnitBehaviour
                 float CheckDist = Vector3.Distance(Unit.transform.position, opponent.transform.position);
                 float CurrentDist = Vector3.Distance(Unit.transform.position, CurrentOpponent.transform.position);
                 if (CheckDist < CurrentDist && opponent != Unit)
+                {
                     CurrentOpponent = opponent;
+                    AttackUnit();
+                }
             }
         }
         return true;
     }
     public void AttackUnit()
     {
-
+        
     }
 }
