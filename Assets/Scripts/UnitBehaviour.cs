@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.UIElements;
 
 public class UnitBehaviour
 {
-
     protected GameObject Unit;
     protected GameObject PathToFollow;
     protected Rigidbody2D rb;
@@ -76,7 +76,7 @@ public class UnitBehaviour
 
     }
 
-    public GameObject FindPath()
+    public void FindPath()
     {
         // Finds the two path objects in the arena and finds the closest path to the unit, which the unit will follow
         Paths = GameObject.FindGameObjectsWithTag("Path");
@@ -87,14 +87,12 @@ public class UnitBehaviour
             PathToFollow = Paths[0];
             PathBounds = GameObject.FindGameObjectsWithTag("Left");
             FindBounds();
-            return Paths[0];
         }
         else
         {
             PathToFollow = Paths[1];
             PathBounds = GameObject.FindGameObjectsWithTag("Right");
             FindBounds();
-            return Paths[1];
         }
     }
     private void FindBounds()
@@ -121,7 +119,6 @@ public class UnitBehaviour
         else
             Opponents = GameObject.FindGameObjectsWithTag("UnitEnemy");
 
-        //Opponents = GameObject.FindGameObjectsWithTag("Unit");
         CurrentOpponent = Opponents[0];
         foreach (GameObject opponent in Opponents)
         {

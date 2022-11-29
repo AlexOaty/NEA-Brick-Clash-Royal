@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -7,7 +8,6 @@ public class UnitMovement : MonoBehaviour
 {
     UnitBehaviour mUnit;
     GameObject Unit;
-    GameObject Path;
     Rigidbody2D Rigidbody;
     public float speed;
     public bool IsEnemy;
@@ -15,13 +15,17 @@ public class UnitMovement : MonoBehaviour
     public float Damage;
     public float AttackSpeed;
     bool AttackUnitRun;
+
     // Start is called before the first frame update
     void Start()
     {
         Unit = gameObject;
         Rigidbody = GetComponent<Rigidbody2D>();
         mUnit = new UnitBehaviour(Unit, Rigidbody, speed, IsEnemy, Health, Damage, AttackSpeed);
-        Path = mUnit.FindPath();
+        mUnit.FindPath();
+        TextMeshPro TMP = new TextMeshPro();
+        TMP.text = "Hello";
+
     }
 
     // Update is called once per frame
