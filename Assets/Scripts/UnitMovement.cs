@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -35,7 +36,7 @@ public class UnitMovement : MonoBehaviour
             gameObject.SetActive(false);
 
         if (!mUnit.EndOfPath && !mUnit.Fighting)
-        {
+        { 
             mUnit.FollowPath();
             mUnit.Fighting = mUnit.CheckArea();
         }

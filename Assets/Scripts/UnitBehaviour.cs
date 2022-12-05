@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -118,8 +119,15 @@ public class UnitBehaviour
             Opponents = GameObject.FindGameObjectsWithTag("UnitPlayer");
         else
             Opponents = GameObject.FindGameObjectsWithTag("UnitEnemy");
+        try
+        {
+            CurrentOpponent = Opponents[0];
 
-        CurrentOpponent = Opponents[0];
+        }
+        catch (IndexOutOfRangeException)
+        {
+            return false;
+        }
         foreach (GameObject opponent in Opponents)
         {
             //UnitBehaviour unitBehaviour = opponent.GetComponent<UnitBehaviour>();
@@ -147,6 +155,11 @@ public class UnitBehaviour
             }
         }
         return true;
+    }
+
+    public bool GetIsEnemy()
+    {
+        return IsEnemy;
     }
 
     //public void AttackUnit()
