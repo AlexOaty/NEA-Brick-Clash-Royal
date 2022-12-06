@@ -48,11 +48,11 @@ public class UnitMovement : MonoBehaviour
     {
         AttackUnitRun = true;
         Debug.Log($"{Unit.tag} Attacking");
+        yield return new WaitForSeconds(AttackSpeed);
         UnitMovement Enemy = (UnitMovement)mUnit.CurrentOpponent.GetComponent("UnitMovement");
+        Enemy.Health -= Damage;
         if (!Enemy.isActiveAndEnabled)
             mUnit.Fighting = false;
-        yield return new WaitForSeconds(AttackSpeed);
-        Enemy.Health -= Damage;
         AttackUnitRun = false;
     }
 }
