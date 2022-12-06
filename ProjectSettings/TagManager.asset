@@ -10,6 +10,12 @@ TagManager:
   - PlayerUnit
   - EnemyUnit
   - Boundary
+  - TopLeft
+  - TopRight
+  - BottomLeft
+  - BottomRight
+  - Left
+  - Right
   layers:
   - Default
   - TransparentFX
@@ -49,4 +55,7 @@ TagManager:
     locked: 0
   - name: New Layer 1
     uniqueID: 3803307989
+    locked: 0
+  - name: Paths
+    uniqueID: 4177114223
     locked: 0
