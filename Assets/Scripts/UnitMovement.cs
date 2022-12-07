@@ -35,13 +35,22 @@ public class UnitMovement : MonoBehaviour
         if (Health <= 0)
             gameObject.SetActive(false);
 
-        if (!mUnit.EndOfPath && !mUnit.Fighting)
+        if (!mUnit.EndOfPath && !mUnit.FightingUnit)
         { 
             mUnit.FollowPath();
-            mUnit.Fighting = mUnit.CheckArea();
+            mUnit.FightingUnit = mUnit.CheckEnemies();
         }
-        else if(mUnit.Fighting && !AttackUnitRun)
-            StartCoroutine(AttackUnit());
+        else if (!mUnit.FightingUnit && mUnit.EndOfPath)
+        {
+            mUnit.FightingUnit = mUnit.CheckEnemies();
+
+            if (!mUnit.FightingUnit)
+                mUnit.FightingUnit = mUnit.CheckBuildings();
+        }
+        else if(mUnit.FightingUnit && !AttackUnitRun)
+            if (AttackSpeed != -1)
+                StartCoroutine(AttackUnit());
+
     }
 
     IEnumerator AttackUnit()
@@ -50,7 +59,7 @@ public class UnitMovement : MonoBehaviour
         Debug.Log($"{Unit.tag} Attacking");
         UnitMovement Enemy = (UnitMovement)mUnit.CurrentOpponent.GetComponent("UnitMovement");
         if (!Enemy.isActiveAndEnabled)
-            mUnit.Fighting = false;
+            mUnit.FightingUnit = false;
         yield return new WaitForSeconds(AttackSpeed);
         Enemy.Health -= Damage;
         AttackUnitRun = false;

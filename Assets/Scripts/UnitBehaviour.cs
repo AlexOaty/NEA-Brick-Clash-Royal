@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using static UnityEngine.GraphicsBuffer;
 
 public class UnitBehaviour
 {
@@ -13,15 +14,18 @@ public class UnitBehaviour
     protected Rigidbody2D rb;
     protected float speed;
     bool IsEnemy;
+    //bool IsBuilding;
     GameObject[] Paths;
     GameObject[] PathBounds;
     GameObject Bottom;
     GameObject Top;
     bool OnPath;
     public bool EndOfPath;
-    public bool Fighting;
+    public bool FightingUnit;
+    //public bool FightingBuilding;
     GameObject[] Opponents;
     public GameObject CurrentOpponent;
+    GameObject[] Buildings;
     public float Health;
     public float Damage;
     public float AttackSpeed;
@@ -110,12 +114,11 @@ public class UnitBehaviour
             Bottom = PathBounds[1];
         }
     }
-    public bool CheckArea()
+    public bool CheckEnemies()
     {
         //Checks the units area for any enemy units and stops the unit if they are in range
         bool InRange = false;
-
-        if(IsEnemy)
+        if (IsEnemy)
             Opponents = GameObject.FindGameObjectsWithTag("UnitPlayer");
         else
             Opponents = GameObject.FindGameObjectsWithTag("UnitEnemy");
@@ -133,14 +136,10 @@ public class UnitBehaviour
             //UnitBehaviour unitBehaviour = opponent.GetComponent<UnitBehaviour>();
             float CheckDist = Vector3.Distance(Unit.transform.position, opponent.transform.position);
             if (CheckDist <= 0.3 && opponent != Unit)
-            {
                 InRange = true;
-            }
         }
         if (InRange == false)
-        {
             return false;
-        }
         else
         {
             foreach (GameObject opponent in Opponents)
@@ -149,8 +148,8 @@ public class UnitBehaviour
                 float CurrentDist = Vector3.Distance(Unit.transform.position, CurrentOpponent.transform.position);
                 if (CheckDist < CurrentDist && opponent != Unit)
                 {
+                    FightingUnit = true;
                     CurrentOpponent = opponent;
-                    Fighting = true;
                 }
             }
         }
@@ -161,6 +160,46 @@ public class UnitBehaviour
     {
         return IsEnemy;
     }
+
+    public bool CheckBuildings()
+    {
+        float distance;
+        Vector3 direction;
+        Buildings = GameObject.FindGameObjectsWithTag("Building");
+        try
+        {
+            CurrentOpponent = Buildings[0];
+        }
+        catch (IndexOutOfRangeException)
+        {
+            return false;
+        }
+        foreach (GameObject Building in Buildings)
+        {
+            float CheckDist = Vector3.Distance(Unit.transform.position, Building.transform.position);
+            float CurrentDist = Vector3.Distance(Unit.transform.position, CurrentOpponent.transform.position);
+            if (CheckDist < CurrentDist && Building != Unit)
+            {
+                CurrentOpponent = Building;
+            }
+        }
+        distance = Vector3.Distance(Unit.transform.position, CurrentOpponent.transform.position);
+        if (distance > 0.3)
+        {
+            direction = CurrentOpponent.transform.position - Unit.transform.position;
+            rb.AddForce(direction / distance * speed);
+            return false;
+        }
+        else
+        {
+            FightingUnit = true;
+            return true;
+        }
+
+
+    }
+
+
 
     //public void AttackUnit()
     //{
