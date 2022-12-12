@@ -627,7 +627,7 @@ MonoBehaviour:
   Health: 20
   Damage: 5
   AttackSpeed: 3
-  KnockBack: 0
+  KnockBack: 10
 --- !u!58 &914087553
 CircleCollider2D:
   m_ObjectHideFlags: 0

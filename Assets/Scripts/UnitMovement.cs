@@ -77,10 +77,10 @@ public class UnitMovement : MonoBehaviour
         Debug.Log($"{Unit.tag} Attacking");
         UnitMovement Enemy = (UnitMovement)mUnit.CurrentOpponent.GetComponent("UnitMovement");
         Enemy.Health -= Damage;
-        if (Enemy.Health > 0)
-            yield return new WaitForSeconds(AttackSpeed);
-        else
+        if (Vector3.Distance(Unit.transform.position, Enemy.transform.position) > 0.3 || Enemy.Health <= 0)
             mUnit.FightingUnit = false;
+        else
+            yield return new WaitForSeconds(AttackSpeed);
         AttackUnitRun = false;
     }
 }
