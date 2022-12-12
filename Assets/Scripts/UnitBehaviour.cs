@@ -29,8 +29,9 @@ public class UnitBehaviour
     public float Health;
     public float Damage;
     public float AttackSpeed;
+    public float kBack;
 
-    public UnitBehaviour(GameObject Unit, Rigidbody2D rb, float speed, bool IsEnemy, float Health, float Damage, float AttackSpeed)
+    public UnitBehaviour(GameObject Unit, Rigidbody2D rb, float speed, bool IsEnemy, float Health, float Damage, float AttackSpeed, float kBack)
     {
         this.Unit = Unit;
         this.rb = rb;
@@ -39,6 +40,7 @@ public class UnitBehaviour
         this.Health = Health;
         this.Damage = Damage;
         this.AttackSpeed = AttackSpeed;
+        this.kBack = kBack;
     }
 
     public void FollowPath()

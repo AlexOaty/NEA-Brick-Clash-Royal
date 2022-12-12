@@ -152,7 +152,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &362223685
 GameObject:
@@ -231,7 +231,7 @@ Transform:
   - {fileID: 1996308050}
   - {fileID: 503020077}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &450878043
 GameObject:
@@ -461,7 +461,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &735099867
 MonoBehaviour:
@@ -480,6 +480,7 @@ MonoBehaviour:
   Health: 20
   Damage: 0
   AttackSpeed: -1
+  KnockBack: 0
 --- !u!50 &735099868
 Rigidbody2D:
   serializedVersion: 4
@@ -534,7 +535,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &914087549
 Rigidbody2D:
@@ -626,6 +627,7 @@ MonoBehaviour:
   Health: 20
   Damage: 5
   AttackSpeed: 3
+  KnockBack: 0
 --- !u!58 &914087553
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2095,7 +2097,51 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1398294703
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1398294705}
+  - component: {fileID: 1398294704}
+  m_Layer: 0
+  m_Name: PlayerActions
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1398294704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1398294703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17b04270fdff1b147ac63f92c9c1366b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1398294705
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1398294703}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.09311628, y: -0.120031625, z: 1.0041825}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1417384590
 GameObject:
@@ -2111,7 +2157,7 @@ GameObject:
   - component: {fileID: 1417384592}
   - component: {fileID: 1417384591}
   m_Layer: 0
-  m_Name: Player
+  m_Name: PlayerUnit
   m_TagString: UnitPlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2150,6 +2196,7 @@ MonoBehaviour:
   Health: 20
   Damage: 5
   AttackSpeed: 5
+  KnockBack: 10
 --- !u!50 &1417384593
 Rigidbody2D:
   serializedVersion: 4
@@ -2231,12 +2278,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1417384590}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.437, y: -0.706, z: 0}
+  m_LocalPosition: {x: -0.098, y: -0.363, z: 0}
   m_LocalScale: {x: 0.6033, y: 0.6371, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1504361009
 GameObject:
@@ -2320,7 +2367,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1789599951
 GameObject:
