@@ -7,18 +7,23 @@ using UnityEngine.UI;
 using UnityEngine.UIElements;
 using static UnityEngine.GraphicsBuffer;
 
-public class Unit
+[CreateAssetMenu(fileName = "UnitType", menuName = "UnitType")]
+public class Unit : ScriptableObject
 {
-    protected GameObject unit;
+    public float speed;
+    public float Health;
+    public float Damage;
+    public float AttackSpeed;
+    public float KnockBack;
+    public GameObject unit;
     protected GameObject PathToFollow;
-    protected Rigidbody2D rb;
-    protected float speed;
-    bool IsEnemy;
+    GameObject Top;
+    GameObject Bottom;
+    public Rigidbody2D rb;
+    public bool IsEnemy;
     //bool IsBuilding;
     GameObject[] Paths;
     GameObject[] PathBounds;
-    GameObject Bottom;
-    GameObject Top;
     bool OnPath;
     public bool EndOfPath;
     public bool FightingUnit;
@@ -26,10 +31,7 @@ public class Unit
     GameObject[] Opponents;
     public GameObject CurrentOpponent;
     GameObject[] Buildings;
-    public float Health;
-    public float Damage;
-    public float AttackSpeed;
-    public float kBack;
+
 
     public Unit(GameObject Unit, Rigidbody2D rb, float speed, bool IsEnemy, float Health, float Damage, float AttackSpeed, float kBack)
     {
@@ -40,7 +42,7 @@ public class Unit
         this.Health = Health;
         this.Damage = Damage;
         this.AttackSpeed = AttackSpeed;
-        this.kBack = kBack;
+        this.KnockBack = kBack;
     }
 
     public void FollowPath()
@@ -93,13 +95,31 @@ public class Unit
         {
             PathToFollow = Paths[0];
             PathBounds = GameObject.FindGameObjectsWithTag("Left");
-            FindBounds();
+            if (PathBounds[0].transform.position.y < 0)
+            {
+                Top = PathBounds[1];
+                Bottom = PathBounds[0];
+            }
+            else
+            {
+                Top = PathBounds[0];
+                Bottom = PathBounds[1];
+            }
         }
         else
         {
             PathToFollow = Paths[1];
             PathBounds = GameObject.FindGameObjectsWithTag("Right");
-            FindBounds();
+            if (PathBounds[0].transform.position.y < 0)
+            {
+                Top = PathBounds[1];
+                Bottom = PathBounds[0];
+            }
+            else
+            {
+                Top = PathBounds[0];
+                Bottom = PathBounds[1];
+            }
         }
     }
     private void FindBounds()

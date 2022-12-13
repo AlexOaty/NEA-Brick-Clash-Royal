@@ -6,35 +6,43 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+
 public class UnitManager : MonoBehaviour
 {
     Unit mUnit;
     GameObject Unit;
     Rigidbody2D Rigidbody;
-    public float speed;
     public bool IsEnemy;
-    public float Health;
     float HealthChange;
-    public float Damage;
-    public float AttackSpeed;
     bool AttackUnitRun;
-    public float KnockBack;
+    public string UnitType;
+    float Health;
 
     // Start is called before the first frame update
     void Start()
     {
         Unit = gameObject;
         Rigidbody = GetComponent<Rigidbody2D>();
-        if (Unit.tag == "Building")
+        UnitsDatabase UnitTypes = GameObject.FindGameObjectWithTag("UnitTypes").GetComponent<UnitsDatabase>();
+        foreach (Unit unit in UnitTypes.units)
         {
-            mUnit = new Unit(Unit, Rigidbody, 0, IsEnemy, Health, Damage, AttackSpeed, KnockBack);
+            if (unit.name == UnitType)
+            {
+                mUnit = ScriptableObject.CreateInstance<Unit>();
+                mUnit.speed = unit.speed;
+                mUnit.Damage = unit.Damage;
+                mUnit.AttackSpeed = unit.AttackSpeed;
+                mUnit.Health = unit.Health;
+                mUnit.KnockBack = unit.KnockBack;
+            }
+
         }
-        else
-        {
-            mUnit = new Unit(Unit, Rigidbody, speed, IsEnemy, Health, Damage, AttackSpeed, KnockBack);
-            mUnit.FindPath();
-        }
+        mUnit.IsEnemy = IsEnemy;
+        mUnit.unit = Unit;
+        mUnit.rb = Rigidbody;
+        Health = mUnit.Health;
         HealthChange = Health;
+        mUnit.FindPath();
 
     }
 
@@ -70,16 +78,16 @@ public class UnitManager : MonoBehaviour
             }
             //Attack enemy unit
             else if (mUnit.FightingUnit && !AttackUnitRun)
-                if (AttackSpeed != -1)
+                if (mUnit.AttackSpeed != -1)
                     StartCoroutine(AttackUnit());
             //Knocks the player back when they lose health
             if (Health < HealthChange)
             {
                 UnitManager Enemy = (UnitManager)mUnit.CurrentOpponent.GetComponent("UnitManager");
-                if (IsEnemy)
-                    Rigidbody.AddForce((Rigidbody.transform.position + new Vector3(0, 1, 0)) * Enemy.KnockBack);
+                if (mUnit.IsEnemy)
+                    Rigidbody.AddForce((Rigidbody.transform.position + new Vector3(0, 1, 0)) * Enemy.mUnit.KnockBack);
                 else
-                    Rigidbody.AddForce((Rigidbody.transform.position - new Vector3(0, 1, 0)) * Enemy.KnockBack);
+                    Rigidbody.AddForce((Rigidbody.transform.position - new Vector3(0, 1, 0)) * Enemy.mUnit.KnockBack);
                 HealthChange = Health;
             }
         }
@@ -94,9 +102,9 @@ public class UnitManager : MonoBehaviour
             mUnit.FightingUnit = false;
         else
         {
-            yield return new WaitForSeconds(AttackSpeed);
+            yield return new WaitForSeconds(mUnit.AttackSpeed);
             Debug.Log($"{Unit.tag} Attacking");
-            Enemy.Health -= Damage;
+            Enemy.Health -= mUnit.Damage;
         }
         AttackUnitRun = false;
     }

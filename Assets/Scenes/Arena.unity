@@ -496,12 +496,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 668ec170ce8722d4ab301d62a74d5f18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
   IsEnemy: 0
-  Health: 20
-  Damage: 4
-  AttackSpeed: 8
-  KnockBack: 4
+  UnitType: Castle
 --- !u!1 &914087547
 GameObject:
   m_ObjectHideFlags: 0
@@ -530,7 +526,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 914087547}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.257, y: 0.685, z: 0}
+  m_LocalPosition: {x: -0.056, y: 0.617, z: 0}
   m_LocalScale: {x: 0.608, y: 0.5949, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -622,12 +618,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 668ec170ce8722d4ab301d62a74d5f18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.8
   IsEnemy: 1
-  Health: 20
-  Damage: 5
-  AttackSpeed: 3
-  KnockBack: 10
+  UnitType: Ghost
 --- !u!58 &914087553
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2191,12 +2183,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 668ec170ce8722d4ab301d62a74d5f18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.8
   IsEnemy: 0
-  Health: 20
-  Damage: 5
-  AttackSpeed: 5
-  KnockBack: 10
+  UnitType: Knight
 --- !u!50 &1417384593
 Rigidbody2D:
   serializedVersion: 4
@@ -2278,7 +2266,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1417384590}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.098, y: -0.363, z: 0}
+  m_LocalPosition: {x: -0.069, y: -0.338, z: 0}
   m_LocalScale: {x: 0.6033, y: 0.6371, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -25207,6 +25195,54 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
+--- !u!1 &1840793935
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1840793937}
+  - component: {fileID: 1840793936}
+  m_Layer: 0
+  m_Name: UnitTypes
+  m_TagString: UnitTypes
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1840793936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1840793935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a4d624cbd665fe40b5d643410ad572c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  units:
+  - {fileID: 11400000, guid: 3d324ce4572391b47b6e2f7b1d59c17a, type: 2}
+  - {fileID: 11400000, guid: eed057c70ab6c2a4287ece9a1e94fa4a, type: 2}
+  - {fileID: 11400000, guid: 89b9ab389835e3b4a8966fa23c460149, type: 2}
+--- !u!4 &1840793937
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1840793935}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.3018044, y: 0.0017624237, z: -3.5034559}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1996308049
 GameObject:
   m_ObjectHideFlags: 0
