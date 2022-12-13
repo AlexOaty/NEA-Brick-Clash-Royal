@@ -7,9 +7,9 @@ using UnityEngine.UI;
 using UnityEngine.UIElements;
 using static UnityEngine.GraphicsBuffer;
 
-public class UnitBehaviour
+public class Unit
 {
-    protected GameObject Unit;
+    protected GameObject unit;
     protected GameObject PathToFollow;
     protected Rigidbody2D rb;
     protected float speed;
@@ -31,9 +31,9 @@ public class UnitBehaviour
     public float AttackSpeed;
     public float kBack;
 
-    public UnitBehaviour(GameObject Unit, Rigidbody2D rb, float speed, bool IsEnemy, float Health, float Damage, float AttackSpeed, float kBack)
+    public Unit(GameObject Unit, Rigidbody2D rb, float speed, bool IsEnemy, float Health, float Damage, float AttackSpeed, float kBack)
     {
-        this.Unit = Unit;
+        this.unit = Unit;
         this.rb = rb;
         this.speed = speed;
         this.IsEnemy = IsEnemy;
@@ -57,10 +57,10 @@ public class UnitBehaviour
                 target = Bottom;
             else
                 target = Top;
-            distance = Vector3.Distance(Unit.transform.position, target.transform.position);
+            distance = Vector3.Distance(unit.transform.position, target.transform.position);
             if (distance > 0.05)
             {
-                direction = target.transform.position - Unit.transform.position;
+                direction = target.transform.position - unit.transform.position;
                 rb.AddForce(direction / distance * speed);
             }
             else
@@ -72,8 +72,8 @@ public class UnitBehaviour
                 target = Top;
             else
                 target = Bottom;
-            distance = Vector3.Distance(Unit.transform.position, target.transform.position);
-            direction = target.transform.position - Unit.transform.position;
+            distance = Vector3.Distance(unit.transform.position, target.transform.position);
+            direction = target.transform.position - unit.transform.position;
             rb.AddForce(direction / distance * speed);
             if (distance < 0.1)
             {
@@ -87,8 +87,8 @@ public class UnitBehaviour
     {
         // Finds the two path objects in the arena and finds the closest path to the unit, which the unit will follow
         Paths = GameObject.FindGameObjectsWithTag("Path");
-        float PathDistance0 = Vector3.Distance(Unit.transform.position, Paths[0].transform.position);
-        float PathDistance1 = Vector3.Distance(Unit.transform.position, Paths[1].transform.position);
+        float PathDistance0 = Vector3.Distance(unit.transform.position, Paths[0].transform.position);
+        float PathDistance1 = Vector3.Distance(unit.transform.position, Paths[1].transform.position);
         if (PathDistance0 < PathDistance1)
         {
             PathToFollow = Paths[0];
@@ -136,8 +136,8 @@ public class UnitBehaviour
         foreach (GameObject opponent in Opponents)
         {
             //UnitBehaviour unitBehaviour = opponent.GetComponent<UnitBehaviour>();
-            float CheckDist = Vector3.Distance(Unit.transform.position, opponent.transform.position);
-            if (CheckDist <= 0.3 && opponent != Unit)
+            float CheckDist = Vector3.Distance(unit.transform.position, opponent.transform.position);
+            if (CheckDist <= 0.3 && opponent != unit)
                 InRange = true;
         }
         if (InRange == false)
@@ -146,9 +146,9 @@ public class UnitBehaviour
         {
             foreach (GameObject opponent in Opponents)
             {
-                float CheckDist = Vector3.Distance(Unit.transform.position, opponent.transform.position);
-                float CurrentDist = Vector3.Distance(Unit.transform.position, CurrentOpponent.transform.position);
-                if (CheckDist < CurrentDist && opponent != Unit)
+                float CheckDist = Vector3.Distance(unit.transform.position, opponent.transform.position);
+                float CurrentDist = Vector3.Distance(unit.transform.position, CurrentOpponent.transform.position);
+                if (CheckDist < CurrentDist && opponent != unit)
                 {
                     FightingUnit = true;
                     CurrentOpponent = opponent;
@@ -178,17 +178,17 @@ public class UnitBehaviour
         }
         foreach (GameObject Building in Buildings)
         {
-            float CheckDist = Vector3.Distance(Unit.transform.position, Building.transform.position);
-            float CurrentDist = Vector3.Distance(Unit.transform.position, CurrentOpponent.transform.position);
-            if (CheckDist < CurrentDist && Building != Unit)
+            float CheckDist = Vector3.Distance(unit.transform.position, Building.transform.position);
+            float CurrentDist = Vector3.Distance(unit.transform.position, CurrentOpponent.transform.position);
+            if (CheckDist < CurrentDist && Building != unit)
             {
                 CurrentOpponent = Building;
             }
         }
-        distance = Vector3.Distance(Unit.transform.position, CurrentOpponent.transform.position);
+        distance = Vector3.Distance(unit.transform.position, CurrentOpponent.transform.position);
         if (distance > 0.3)
         {
-            direction = CurrentOpponent.transform.position - Unit.transform.position;
+            direction = CurrentOpponent.transform.position - unit.transform.position;
             rb.AddForce(direction / distance * speed);
             return false;
         }

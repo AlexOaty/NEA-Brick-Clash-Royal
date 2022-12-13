@@ -361,7 +361,7 @@ GameObject:
   - component: {fileID: 735099866}
   - component: {fileID: 735099865}
   - component: {fileID: 735099864}
-  - component: {fileID: 735099867}
+  - component: {fileID: 735099870}
   - component: {fileID: 735099868}
   m_Layer: 0
   m_Name: Castle
@@ -463,24 +463,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &735099867
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 735099863}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 668ec170ce8722d4ab301d62a74d5f18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0
-  IsEnemy: 0
-  Health: 20
-  Damage: 0
-  AttackSpeed: -1
-  KnockBack: 0
 --- !u!50 &735099868
 Rigidbody2D:
   serializedVersion: 4
@@ -502,6 +484,24 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
+--- !u!114 &735099870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 735099863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 668ec170ce8722d4ab301d62a74d5f18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0
+  IsEnemy: 0
+  Health: 20
+  Damage: 4
+  AttackSpeed: 8
+  KnockBack: 4
 --- !u!1 &914087547
 GameObject:
   m_ObjectHideFlags: 0
