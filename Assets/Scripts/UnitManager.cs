@@ -54,8 +54,8 @@ public class UnitManager : MonoBehaviour
             gameObject.SetActive(false);
         if (Unit.tag == "Building")
         {
-            if (!mUnit.FightingUnit)
-                mUnit.FightingUnit = mUnit.CheckEnemies();
+            if (!mUnit.GetFighting())
+                mUnit.SetFighting(mUnit.CheckEnemies());
             else if (!AttackUnitRun)
                 StartCoroutine(AttackUnit());
         }
@@ -63,27 +63,27 @@ public class UnitManager : MonoBehaviour
         {
 
             //follow path
-            if (!mUnit.EndOfPath && !mUnit.FightingUnit)
+            if (!mUnit.GetEndOfPath() && !mUnit.GetFighting())
             {
                 mUnit.FollowPath();
-                mUnit.FightingUnit = mUnit.CheckEnemies();
+                mUnit.SetFighting(mUnit.CheckEnemies());
             }
             //Check for enemies or buildings
-            else if (!mUnit.FightingUnit && mUnit.EndOfPath)
+            else if (!mUnit.GetFighting() && mUnit.GetEndOfPath())
             {
-                mUnit.FightingUnit = mUnit.CheckEnemies();
+                mUnit.SetFighting(mUnit.CheckEnemies());
 
-                if (!mUnit.FightingUnit)
-                    mUnit.FightingUnit = mUnit.CheckBuildings();
+                if (!mUnit.GetFighting())
+                    mUnit.SetFighting(mUnit.CheckBuildings());
             }
             //Attack enemy unit
-            else if (mUnit.FightingUnit && !AttackUnitRun)
+            else if (mUnit.GetFighting() && !AttackUnitRun)
                 if (mUnit.AttackSpeed != -1)
                     StartCoroutine(AttackUnit());
             //Knocks the player back when they lose health
             if (Health < HealthChange)
             {
-                UnitManager Enemy = (UnitManager)mUnit.CurrentOpponent.GetComponent("UnitManager");
+                UnitManager Enemy = (UnitManager)mUnit.GetCurrentOpponent().GetComponent("UnitManager");
                 if (mUnit.IsEnemy)
                     Rigidbody.AddForce((Rigidbody.transform.position + new Vector3(0, 1, 0)) * Enemy.mUnit.KnockBack);
                 else
@@ -97,9 +97,9 @@ public class UnitManager : MonoBehaviour
     IEnumerator AttackUnit()
     {
         AttackUnitRun = true;
-        UnitManager Enemy = (UnitManager)mUnit.CurrentOpponent.GetComponent("UnitManager");
+        UnitManager Enemy = (UnitManager)mUnit.GetCurrentOpponent().GetComponent("UnitManager");
         if (Vector3.Distance(Unit.transform.position, Enemy.transform.position) > 0.3 || Enemy.Health <= 0)
-            mUnit.FightingUnit = false;
+            mUnit.SetFighting(false);
         else
         {
             yield return new WaitForSeconds(mUnit.AttackSpeed);

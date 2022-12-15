@@ -16,20 +16,20 @@ public class Unit : ScriptableObject
     public float AttackSpeed;
     public float KnockBack;
     public GameObject unit;
+    public Rigidbody2D rb;
+    public bool IsEnemy;
     protected GameObject PathToFollow;
     GameObject Top;
     GameObject Bottom;
-    public Rigidbody2D rb;
-    public bool IsEnemy;
     //bool IsBuilding;
     GameObject[] Paths;
     GameObject[] PathBounds;
     bool OnPath;
-    public bool EndOfPath;
-    public bool FightingUnit;
+    bool EndOfPath;
+    bool FightingUnit;
     //public bool FightingBuilding;
     GameObject[] Opponents;
-    public GameObject CurrentOpponent;
+    GameObject CurrentOpponent;
     GameObject[] Buildings;
 
 
@@ -219,6 +219,26 @@ public class Unit : ScriptableObject
         }
 
 
+    }
+
+    public bool GetEndOfPath()
+    {
+        return EndOfPath;
+    }
+
+    public GameObject GetCurrentOpponent()
+    {
+        return CurrentOpponent;
+    }
+
+    public void SetFighting(bool Fighting)
+    {
+        FightingUnit = Fighting;
+    }
+
+    public bool GetFighting()
+    {
+        return FightingUnit;
     }
 
 
