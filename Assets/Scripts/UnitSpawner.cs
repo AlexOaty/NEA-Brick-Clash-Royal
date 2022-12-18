@@ -7,16 +7,11 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.WSA;
 
-public class PlayerActions : MonoBehaviour
+public class UnitSpawner : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameObject Unit;
+    public void SpawnUnit()
     {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        Instantiate(Unit, new Vector3(-0.069f, -0.338f, 0), Quaternion.identity);
     }
 }
