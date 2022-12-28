@@ -273,6 +273,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 494620765}
+  - component: {fileID: 494620769}
   - component: {fileID: 494620768}
   - component: {fileID: 494620767}
   - component: {fileID: 494620766}
@@ -348,9 +349,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1930354478}
+      - m_Target: {fileID: 494620769}
         m_TargetAssemblyTypeName: UnitSpawner, Assembly-CSharp
-        m_MethodName: SpawnUnit
+        m_MethodName: Activate
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -398,6 +399,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 494620764}
   m_CullTransparentMesh: 1
+--- !u!114 &494620769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 494620764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17b04270fdff1b147ac63f92c9c1366b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Unit: {fileID: 1372403417425110963, guid: e75d329d4c4649b4585b521ae3a68a8d, type: 3}
+  isActive: 0
 --- !u!1 &503020076
 GameObject:
   m_ObjectHideFlags: 0
@@ -2127,7 +2142,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 1.0226047
+  orthographic size: 1.0593468
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -25053,7 +25068,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1930354479}
-  - component: {fileID: 1930354478}
   - component: {fileID: 1930354477}
   - component: {fileID: 1930354476}
   - component: {fileID: 1930354475}
@@ -25126,19 +25140,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!114 &1930354478
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1930354474}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17b04270fdff1b147ac63f92c9c1366b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Unit: {fileID: 1372403417425110963, guid: e75d329d4c4649b4585b521ae3a68a8d, type: 3}
 --- !u!224 &1930354479
 RectTransform:
   m_ObjectHideFlags: 0

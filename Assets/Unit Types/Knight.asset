@@ -20,6 +20,3 @@ MonoBehaviour:
   unit: {fileID: 0}
   rb: {fileID: 0}
   IsEnemy: 0
-  EndOfPath: 0
-  FightingUnit: 0
-  CurrentOpponent: {fileID: 0}
