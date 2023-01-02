@@ -17,9 +17,7 @@ MonoBehaviour:
   Damage: 5
   AttackSpeed: 3
   KnockBack: 7
+  Cost: 2
   unit: {fileID: 0}
   rb: {fileID: 0}
   IsEnemy: 0
-  EndOfPath: 0
-  FightingUnit: 0
-  CurrentOpponent: {fileID: 0}

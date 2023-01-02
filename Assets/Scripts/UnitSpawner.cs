@@ -10,7 +10,15 @@ using UnityEngine.WSA;
 public class UnitSpawner : MonoBehaviour
 {
     public GameObject Unit;
+    UnitManager unitManager;
+    GameManager gameManager;
     public bool isActive = false;
+
+    void Start()
+    {
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        unitManager = Unit.GetComponent<UnitManager>();
+    }
     void Update()
     {
         if (isActive)
@@ -25,10 +33,11 @@ public class UnitSpawner : MonoBehaviour
     public void Spawn()
     {
         Vector3 MousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && gameManager.BrickNum >= 1)
         {
             Instantiate(Unit, new Vector3(MousePosition.x, MousePosition.y, 0f), Quaternion.identity);
             isActive = false;
+            gameManager.BrickNum--;
         }
     }
 }

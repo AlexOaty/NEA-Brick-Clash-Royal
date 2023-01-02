@@ -17,6 +17,7 @@ MonoBehaviour:
   Damage: 5
   AttackSpeed: 5
   KnockBack: 6
+  Cost: 1
   unit: {fileID: 0}
   rb: {fileID: 0}
   IsEnemy: 0

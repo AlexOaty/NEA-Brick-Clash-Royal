@@ -9,7 +9,7 @@ using UnityEngine.UIElements;
 
 public class UnitManager : MonoBehaviour
 {
-    Unit mUnit;
+    public Unit mUnit;
     GameObject Unit;
     Rigidbody2D Rigidbody;
     public bool IsEnemy;

@@ -15,6 +15,7 @@ public class Unit : ScriptableObject
     public float Damage;
     public float AttackSpeed;
     public float KnockBack;
+    public float Cost;
     public GameObject unit;
     public Rigidbody2D rb;
     public bool IsEnemy;
@@ -33,17 +34,17 @@ public class Unit : ScriptableObject
     GameObject[] Buildings;
 
 
-    public Unit(GameObject Unit, Rigidbody2D rb, float speed, bool IsEnemy, float Health, float Damage, float AttackSpeed, float kBack)
-    {
-        this.unit = Unit;
-        this.rb = rb;
-        this.speed = speed;
-        this.IsEnemy = IsEnemy;
-        this.Health = Health;
-        this.Damage = Damage;
-        this.AttackSpeed = AttackSpeed;
-        this.KnockBack = kBack;
-    }
+    //public Unit(GameObject Unit, Rigidbody2D rb, float speed, bool IsEnemy, float Health, float Damage, float AttackSpeed, float kBack)
+    //{
+    //    this.unit = Unit;
+    //    this.rb = rb;
+    //    this.speed = speed;
+    //    this.IsEnemy = IsEnemy;
+    //    this.Health = Health;
+    //    this.Damage = Damage;
+    //    this.AttackSpeed = AttackSpeed;
+    //    this.KnockBack = kBack;
+    //}
 
     public void FollowPath()
     {
