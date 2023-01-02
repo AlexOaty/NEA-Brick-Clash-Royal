@@ -17,6 +17,7 @@ public class UnitManager : MonoBehaviour
     bool AttackUnitRun;
     public string UnitType;
     float Health;
+    SpriteRenderer spriteRenderer;
 
     // Start is called before the first frame update
     void Start()
@@ -43,7 +44,11 @@ public class UnitManager : MonoBehaviour
         Health = mUnit.Health;
         HealthChange = Health;
         mUnit.FindPath();
-
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        if (IsEnemy)
+        {
+            spriteRenderer.color = Color.red;
+        }
     }
 
     // Update is called once per frame
