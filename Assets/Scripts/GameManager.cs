@@ -7,9 +7,9 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public float BrickNum;
+    bool BrickAdding;
     public UnitManager PlayerCastle;
     public UnitManager EnemyCastle;
-    bool BrickAdding;
     public TextMeshProUGUI Bricks;
     public TextMeshProUGUI PlayerCastleHealth;
     public TextMeshProUGUI EnemyCastleHealth;
