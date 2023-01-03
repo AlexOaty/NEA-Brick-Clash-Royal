@@ -9,9 +9,9 @@ using UnityEngine.WSA;
 
 public class UnitSpawner : MonoBehaviour
 {
-    public GameObject Unit;
     UnitManager unitManager;
     GameManager gameManager;
+    public GameObject Unit;
     public bool isActive = false;
 
     void Start()
