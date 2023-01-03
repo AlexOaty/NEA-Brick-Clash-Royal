@@ -23,9 +23,9 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Bricks.text = ("Bricks: " + BrickNum.ToString());
-        PlayerCastleHealth.text = ("Castle Health: " + PlayerCastle.Health.ToString());
-        if(BrickNum <5 && !BrickAdding) 
+        Bricks.text = "Bricks: " + BrickNum.ToString();
+        PlayerCastleHealth.text = "Castle Health: " + PlayerCastle.Health.ToString();
+        if(BrickNum<5 && !BrickAdding) 
         {
             StartCoroutine("AddBrick");
         }
