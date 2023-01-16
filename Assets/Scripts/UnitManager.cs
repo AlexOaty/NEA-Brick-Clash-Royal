@@ -16,7 +16,7 @@ public class UnitManager : MonoBehaviour
     float HealthChange;
     bool AttackUnitRun;
     public string UnitType;
-    float Health;
+    public float Health;
     SpriteRenderer spriteRenderer;
 
     // Start is called before the first frame update

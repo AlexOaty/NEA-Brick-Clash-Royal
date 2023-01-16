@@ -6,9 +6,13 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] public float BrickNum;
+    public float BrickNum;
     bool BrickAdding;
+    public UnitManager PlayerCastle;
+    public UnitManager EnemyCastle;
     public TextMeshProUGUI Bricks;
+    public TextMeshProUGUI PlayerCastleHealth;
+    public TextMeshProUGUI EnemyCastleHealth;
     
     void Start()
     {
@@ -19,8 +23,9 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Bricks.text = ("Bricks: " + BrickNum.ToString());
-        if(BrickNum <5 && !BrickAdding) 
+        Bricks.text = "Bricks: " + BrickNum.ToString();
+        PlayerCastleHealth.text = "Castle Health: " + PlayerCastle.Health.ToString();
+        if(BrickNum<5 && !BrickAdding) 
         {
             StartCoroutine("AddBrick");
         }
