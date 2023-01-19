@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class ResearchTree : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public List<Ability> abilities;
+    Ability[] Tree;
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        for (int i = 0; i < abilities.Count; i++)
+        {
+
+        }
     }
 }

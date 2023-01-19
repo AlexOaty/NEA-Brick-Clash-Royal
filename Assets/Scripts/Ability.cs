@@ -4,18 +4,11 @@ using UnityEngine;
 
 
 [CreateAssetMenu(fileName = "Ability", menuName = "Ability")]
+
 public class Ability : ScriptableObject
 {
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public string attribute;
+    public int change;
+    public int cost;
+    public bool unlocked;
 }

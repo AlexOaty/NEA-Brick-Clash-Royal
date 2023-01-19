@@ -36,7 +36,6 @@ public class UnitManager : MonoBehaviour
                 mUnit.Health = unit.Health;
                 mUnit.KnockBack = unit.KnockBack;
             }
-
         }
         mUnit.IsEnemy = IsEnemy;
         mUnit.unit = Unit;
