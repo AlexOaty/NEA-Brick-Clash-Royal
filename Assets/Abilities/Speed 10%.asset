@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c73a4dcc79f8e40448e4546464e72acb, type: 3}
   m_Name: Speed 10%
   m_EditorClassIdentifier: 
+  Location: 2
   attribute: Speed
   change: 10
   cost: 30
   unlocked: 0
+  left: -1
+  right: -1
