@@ -7,11 +7,14 @@ using UnityEngine.UI;
 
 public class Ability : ScriptableObject
 {
-    public int Location;
+    public string ID;
     public string attribute;
     public int change;
     public int cost;
     public bool unlocked;
+    public bool purchased;
+    public string LeftID;
+    public string RightID;
     public int left;
     public int right;
     public GameObject Button;
