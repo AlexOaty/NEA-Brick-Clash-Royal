@@ -18,7 +18,7 @@ public class ResearchTree : ScriptableObject
         Current = Root;
     }
 
-    public bool Purchase(string Ability)
+    public string Purchase(string Ability)
     {
         foreach (Ability ability in Data)
         {
