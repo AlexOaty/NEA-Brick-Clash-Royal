@@ -35,11 +35,11 @@ public class ResearchTree : ScriptableObject
                     Data[ability.right].unlocked = true;
                     Debug.Log("Right Unlocked");
                 }
-                return true;
+                return Ability;
             }
         }
         Debug.Log("Cannot Purchase Ability because it is not unlocked");
-        return false;
+        return null;
     }
 
 
