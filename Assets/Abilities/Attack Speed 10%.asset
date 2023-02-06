@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: ASpeed1
   attribute: AttackSpeed
-  change: 10
+  change: 0.1
   cost: 40
   unlocked: 1
   purchased: 0
-  LeftID: Range1
+  LeftID: Health1
   RightID: Speed1
-  left: 0
-  right: 0
+  left: 1
+  right: 2
   Button: {fileID: 0}

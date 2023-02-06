@@ -9,7 +9,7 @@ public class Ability : ScriptableObject
 {
     public string ID;
     public string attribute;
-    public int change;
+    public float change;
     public int cost;
     public bool unlocked;
     public bool purchased;

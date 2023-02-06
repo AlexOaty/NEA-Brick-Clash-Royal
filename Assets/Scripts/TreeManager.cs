@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.Purchasing;
 using UnityEngine;
 
@@ -9,6 +10,7 @@ public class TreeManager : MonoBehaviour
     public List<Ability> Abilities;
     List<Unit> units;
     UnitsDatabase unitsDatabase;
+    Ability ability;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,9 +45,27 @@ public class TreeManager : MonoBehaviour
 
     public void Purchase(string Ability)
     {
-        if(ResearchTree.Purchase(Ability))
+        ability = ResearchTree.Purchase(Ability);
+        if(ability != null)
         {
-
+            foreach (Unit unit in units)
+            {
+                if (unit.name == "Knight")
+                {
+                    if (ability.attribute == "AttackSpeed")
+                    {
+                        unit.AttackSpeed *= (1 - ability.change);
+                    }
+                    else if (ability.attribute == "Health")
+                    {
+                        unit.Health *= (1 + ability.change);
+                    }
+                    else if (ability.attribute == "Speed")
+                    {
+                        unit.speed *= (1 + ability.change);
+                    }
+                }
+            }
         }
     }
 }

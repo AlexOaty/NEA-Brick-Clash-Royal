@@ -18,7 +18,7 @@ public class ResearchTree : ScriptableObject
         Current = Root;
     }
 
-    public string Purchase(string Ability)
+    public Ability Purchase(string Ability)
     {
         foreach (Ability ability in Data)
         {
@@ -35,7 +35,7 @@ public class ResearchTree : ScriptableObject
                     Data[ability.right].unlocked = true;
                     Debug.Log("Right Unlocked");
                 }
-                return Ability;
+                return ability;
             }
         }
         Debug.Log("Cannot Purchase Ability because it is not unlocked");
