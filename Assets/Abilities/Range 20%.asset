@@ -12,7 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c73a4dcc79f8e40448e4546464e72acb, type: 3}
   m_Name: Range 20%
   m_EditorClassIdentifier: 
-  attribute: Range
-  change: 20
+  ID: Health1
+  attribute: Health
+  change: 0.2
   cost: 30
   unlocked: 0
+  purchased: 0
+  LeftID: -1
+  RightID: -1
+  left: -1
+  right: -1
+  Button: {fileID: 0}

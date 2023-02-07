@@ -12,7 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c73a4dcc79f8e40448e4546464e72acb, type: 3}
   m_Name: Speed 10%
   m_EditorClassIdentifier: 
+  ID: Speed1
   attribute: Speed
-  change: 10
+  change: 0.1
   cost: 30
   unlocked: 0
+  purchased: 0
+  LeftID: -1
+  RightID: -1
+  left: -1
+  right: -1
+  Button: {fileID: 0}
