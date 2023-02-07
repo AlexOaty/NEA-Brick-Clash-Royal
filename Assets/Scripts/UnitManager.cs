@@ -18,6 +18,7 @@ public class UnitManager : MonoBehaviour
     public string UnitType;
     public float Health;
     SpriteRenderer spriteRenderer;
+    public TextMeshProUGUI Text;
 
     // Start is called before the first frame update
     void Start()
@@ -93,6 +94,9 @@ public class UnitManager : MonoBehaviour
                 else
                     Rigidbody.AddForce((Rigidbody.transform.position - new Vector3(0, 1, 0)) * Enemy.mUnit.KnockBack);
                 HealthChange = Health;
+                Instantiate(Text, transform.position, Quaternion.identity);
+                Text.text = (HealthChange - Health).ToString();
+                Text.transform.parent = GameObject.FindGameObjectWithTag("Canvas").transform;
             }
         }
 

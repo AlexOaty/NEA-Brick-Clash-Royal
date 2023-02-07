@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c73a4dcc79f8e40448e4546464e72acb, type: 3}
-  m_Name: Range 20%
+  m_Name: Health 20%
   m_EditorClassIdentifier: 
   ID: Health1
   attribute: Health
@@ -20,6 +20,5 @@ MonoBehaviour:
   purchased: 0
   LeftID: -1
   RightID: -1
-  left: -1
-  right: -1
-  Button: {fileID: 0}
+  left: 0
+  right: 0

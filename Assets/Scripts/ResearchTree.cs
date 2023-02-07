@@ -38,7 +38,7 @@ public class ResearchTree : ScriptableObject
                 return ability;
             }
         }
-        Debug.Log("Cannot Purchase Ability because it is not unlocked");
+        Debug.Log("Cannot Purchase Ability because it is not unlocked or has been purchased already");
         return null;
     }
 

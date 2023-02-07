@@ -17,5 +17,4 @@ public class Ability : ScriptableObject
     public string RightID;
     public int left;
     public int right;
-    public GameObject Button;
 }

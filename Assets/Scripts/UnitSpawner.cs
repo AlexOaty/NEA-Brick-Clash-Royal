@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEditor;
@@ -33,7 +34,7 @@ public class UnitSpawner : MonoBehaviour
     public void Spawn()
     {
         Vector3 MousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        if (Input.GetMouseButton(0) && gameManager.BrickNum >= 1)
+        if (Input.GetMouseButtonDown(0) && gameManager.BrickNum >= 1)
         {
             Instantiate(Unit, new Vector3(MousePosition.x, MousePosition.y, 0f), Quaternion.identity);
             isActive = false;

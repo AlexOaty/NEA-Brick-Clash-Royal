@@ -22,4 +22,3 @@ MonoBehaviour:
   RightID: Speed1
   left: 1
   right: 2
-  Button: {fileID: 0}
