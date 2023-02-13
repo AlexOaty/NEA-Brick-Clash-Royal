@@ -22,4 +22,3 @@ MonoBehaviour:
   RightID: -1
   left: -1
   right: -1
-  Button: {fileID: 0}

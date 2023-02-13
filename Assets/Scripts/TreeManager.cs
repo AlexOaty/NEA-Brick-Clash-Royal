@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEditor.Purchasing;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TreeManager : MonoBehaviour
 {
@@ -11,6 +13,8 @@ public class TreeManager : MonoBehaviour
     List<Unit> units;
     UnitsDatabase unitsDatabase;
     Ability ability;
+    GameObject[] ButtonsGO;
+    TextMeshProUGUI[] buttons;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +22,16 @@ public class TreeManager : MonoBehaviour
         units = unitsDatabase.units;
         BuildTree();
         ResearchTree = new ResearchTree(Abilities);
+        ButtonsGO = GameObject.FindGameObjectsWithTag("Tree");
+        for (int i = 0; i < ButtonsGO.Length; i++)
+        {
+            buttons[i] = ButtonsGO[i].GetComponentInChildren<TextMeshProUGUI>();
+        }
+    }
+
+    private void Update()
+    {
+
     }
 
     public void BuildTree()
