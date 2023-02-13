@@ -13,8 +13,8 @@ public class TreeManager : MonoBehaviour
     List<Unit> units;
     UnitsDatabase unitsDatabase;
     Ability ability;
-    GameObject[] ButtonsGO;
-    TextMeshProUGUI[] buttons;
+    List<GameObject> ButtonsGO;
+    TextMeshProUGUI Info;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,16 +22,33 @@ public class TreeManager : MonoBehaviour
         units = unitsDatabase.units;
         BuildTree();
         ResearchTree = new ResearchTree(Abilities);
-        ButtonsGO = GameObject.FindGameObjectsWithTag("Tree");
-        for (int i = 0; i < ButtonsGO.Length; i++)
-        {
-            buttons[i] = ButtonsGO[i].GetComponentInChildren<TextMeshProUGUI>();
-        }
+        Info = GameObject.FindGameObjectWithTag("KnightInfo").GetComponent<TextMeshProUGUI>();
+        Info.text = "Knight Upgrades:";
+        //for (int i = 0; i < Abilities.Count; i++)
+        //{
+        //    ButtonsGO.Add(GameObject.FindGameObjectWithTag(Abilities[i].ID));
+        //}
     }
 
     private void Update()
     {
-
+        //for (int i = 0; i < Abilities.Count; i++)
+        //{
+        //    foreach (Ability ability in Abilities)
+        //    {
+        //        if (ButtonsGO[i].tag == ability.ID)
+        //        {
+        //            if (ability.unlocked)
+        //            {
+        //                ButtonsGO[i].SetActive(true);
+        //            }
+        //            else
+        //            {
+        //                ButtonsGO[i].SetActive(false);
+        //            }
+        //        }
+        //    }
+        //}
     }
 
     public void BuildTree()
@@ -62,6 +79,7 @@ public class TreeManager : MonoBehaviour
         ability = ResearchTree.Purchase(Ability);
         if(ability != null)
         {
+        Info.text += $"\n{ability.attribute} +{ability.change * 100}%";
             foreach (Unit unit in units)
             {
                 if (unit.name == "Knight")

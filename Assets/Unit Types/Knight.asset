@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Knight
   m_EditorClassIdentifier: 
   speed: 0.8
-  Health: 24
+  Health: 20
   Damage: 5
   AttackSpeed: 5
   KnockBack: 6
