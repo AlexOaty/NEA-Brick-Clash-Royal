@@ -541,7 +541,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1550651625}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1572260295}
+        m_TargetAssemblyTypeName: SceneSwitcher, Assembly-CSharp
+        m_MethodName: LoadScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Tree
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1550651625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -589,6 +601,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1572260294}
+  - component: {fileID: 1572260296}
   - component: {fileID: 1572260293}
   - component: {fileID: 1572260295}
   - component: {fileID: 1572260292}
@@ -697,6 +710,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03b516a8799c3a04886e750634f4ed30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1572260296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1572260290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f8c060a1893ef44db936299a8b7c2a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BrickNum: 0
+  PlayerCastle: {fileID: 0}
+  EnemyCastle: {fileID: 0}
+  Bricks: {fileID: 0}
+  PlayerCastleHealth: {fileID: 0}
+  EnemyCastleHealth: {fileID: 0}
 --- !u!1 &2061682976
 GameObject:
   m_ObjectHideFlags: 0
