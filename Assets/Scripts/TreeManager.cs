@@ -100,4 +100,9 @@ public class TreeManager : MonoBehaviour
             }
         }
     }
+    
+    public List<Ability> GetAbilities()
+    {
+        return Abilities;
+    }
 }

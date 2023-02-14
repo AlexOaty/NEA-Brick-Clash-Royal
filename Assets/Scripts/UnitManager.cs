@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -18,11 +19,12 @@ public class UnitManager : MonoBehaviour
     public string UnitType;
     public float Health;
     SpriteRenderer spriteRenderer;
-    public TextMeshProUGUI Text;
+    TextMeshProUGUI textMeshProUGUI;
 
     // Start is called before the first frame update
     void Start()
     {
+        textMeshProUGUI = GameObject.FindGameObjectWithTag("HealthText").GetComponent<TextMeshProUGUI>();
         Unit = gameObject;
         Rigidbody = GetComponent<Rigidbody2D>();
         UnitsDatabase UnitTypes = GameObject.FindGameObjectWithTag("UnitTypes").GetComponent<UnitsDatabase>();
@@ -94,25 +96,30 @@ public class UnitManager : MonoBehaviour
                 else
                     Rigidbody.AddForce((Rigidbody.transform.position - new Vector3(0, 1, 0)) * Enemy.mUnit.KnockBack);
                 HealthChange = Health;
-                Instantiate(Text, transform.position, Quaternion.identity);
-                Text.text = (HealthChange - Health).ToString();
-                Text.transform.parent = GameObject.FindGameObjectWithTag("Canvas").transform;
             }
         }
 
     }
 
+    public void SayOuch()
+    {
+        Debug.Log("I was hit");
+    }
+
     IEnumerator AttackUnit()
     {
         AttackUnitRun = true;
-        UnitManager Enemy = (UnitManager)mUnit.GetCurrentOpponent().GetComponent("UnitManager");
-        if (Vector3.Distance(Unit.transform.position, Enemy.transform.position) > 0.3 || Enemy.Health <= 0)
+        UnitManager Victim = (UnitManager)mUnit.GetCurrentOpponent().GetComponent("UnitManager");
+        if (Vector3.Distance(Unit.transform.position, Victim.transform.position) > 0.3 || Victim.Health <= 0)
             mUnit.SetFighting(false);
         else
         {
             yield return new WaitForSeconds(mUnit.AttackSpeed);
             Debug.Log($"{Unit.tag} Attacking");
-            Enemy.Health -= mUnit.Damage;
+            Victim.Health -= mUnit.Damage;
+            textMeshProUGUI.text = "-"+mUnit.Damage.ToString();
+            Instantiate(textMeshProUGUI, Victim.transform, false);
+            Victim.SayOuch();
         }
         AttackUnitRun = false;
     }
