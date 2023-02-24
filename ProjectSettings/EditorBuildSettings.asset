@@ -20,4 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Arena.unity
     guid: f1ed9192c65162d44844fd231f3c1c67
+  - enabled: 1
+    path: Assets/Scenes/Upgrader.unity
+    guid: aa41431bd49bd4642a562fb8144e105b
+  - enabled: 1
+    path: Assets/Scenes/Tree.unity
+    guid: 63596fdbd8fc5e249b58bca114613633
   m_configObjects: {}

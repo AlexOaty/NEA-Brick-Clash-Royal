@@ -4,13 +4,16 @@ using System.IO;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class LoginRegister : MonoBehaviour
 {
     string Username;
     string Password;
-    string path = "C:\\Users\\Alex\\source\\repos\\NEA-Lego-Clash-Royale\\Assets\\Scripts\\UserInfo.txt";
+    string path = "C:\\Users\\Alex\\source\\repos\\AlexOaty\\NEA-Lego-Clash-Royale\\Assets\\Scripts\\UserInfo.txt";
+    public TextAsset text;
 
     public void ReadUsername(string U)
     {
@@ -26,7 +29,7 @@ public class LoginRegister : MonoBehaviour
 
     public void Register()
     {
-        string[] info = File.ReadAllText(path).Split("\n");
+        string[] info = text.text.Split("/n");
         foreach (string line in info)
         {
             string[] strings = line.Split(',');
@@ -49,6 +52,7 @@ public class LoginRegister : MonoBehaviour
             if (Username == strings[0] && Password == strings[1])
             {
                 Debug.Log("Login successful");
+                SceneManager.LoadScene("Upgrader");
                 return;
             }
         }
