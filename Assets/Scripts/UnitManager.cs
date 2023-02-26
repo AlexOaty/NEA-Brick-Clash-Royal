@@ -5,6 +5,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 using UnityEngine.UIElements;
 
 
@@ -19,12 +20,14 @@ public class UnitManager : MonoBehaviour
     public string UnitType;
     public float Health;
     SpriteRenderer spriteRenderer;
-    TextMeshProUGUI textMeshProUGUI;
+    GameObject text;
+    Canvas TextCanvas;
 
     // Start is called before the first frame update
     void Start()
     {
-        textMeshProUGUI = GameObject.FindGameObjectWithTag("HealthText").GetComponent<TextMeshProUGUI>();
+        text = GameObject.FindGameObjectWithTag("HealthText");
+        TextCanvas = FindObjectOfType<Canvas>();
         Unit = gameObject;
         Rigidbody = GetComponent<Rigidbody2D>();
         UnitsDatabase UnitTypes = GameObject.FindGameObjectWithTag("UnitTypes").GetComponent<UnitsDatabase>();
@@ -87,18 +90,35 @@ public class UnitManager : MonoBehaviour
             else if (mUnit.GetFighting() && !AttackUnitRun)
                 if (mUnit.AttackSpeed != -1)
                     StartCoroutine(AttackUnit());
-            //Knocks the player back when they lose health
-            if (Health < HealthChange)
-            {
-                UnitManager Enemy = (UnitManager)mUnit.GetCurrentOpponent().GetComponent("UnitManager");
-                if (mUnit.IsEnemy)
-                    Rigidbody.AddForce((Rigidbody.transform.position + new Vector3(0, 1, 0)) * Enemy.mUnit.KnockBack);
-                else
-                    Rigidbody.AddForce((Rigidbody.transform.position - new Vector3(0, 1, 0)) * Enemy.mUnit.KnockBack);
-                HealthChange = Health;
-            }
         }
 
+    }
+
+    void Update()
+    {
+        if (Health < HealthChange)
+        {
+            StartCoroutine(DisplayDamage());
+            UnitManager Enemy = (UnitManager)mUnit.GetCurrentOpponent().GetComponent("UnitManager");
+            if (mUnit.IsEnemy)
+                Rigidbody.AddForce((Rigidbody.transform.position + new Vector3(0, 1, 0)) * Enemy.mUnit.KnockBack);
+            else
+                Rigidbody.AddForce((Rigidbody.transform.position - new Vector3(0, 1, 0)) * Enemy.mUnit.KnockBack);
+            HealthChange = Health;
+        }
+    }
+
+    
+
+    IEnumerator DisplayDamage()
+    {
+        Debug.Log("Display");
+        GameObject healthtext = Instantiate(text, gameObject.transform.position, Quaternion.identity);
+        healthtext.transform.SetParent(TextCanvas.transform, false);
+        healthtext.GetComponent<TextMeshProUGUI>().text = (HealthChange - Health).ToString();
+        yield return new WaitForSeconds(1);
+        Destroy(healthtext);
+        Debug.Log("Destroy");
     }
 
     public void SayOuch()
@@ -117,8 +137,6 @@ public class UnitManager : MonoBehaviour
             yield return new WaitForSeconds(mUnit.AttackSpeed);
             Debug.Log($"{Unit.tag} Attacking");
             Victim.Health -= mUnit.Damage;
-            textMeshProUGUI.text = "-"+mUnit.Damage.ToString();
-            Instantiate(textMeshProUGUI, Victim.transform, false);
             Victim.SayOuch();
         }
         AttackUnitRun = false;
