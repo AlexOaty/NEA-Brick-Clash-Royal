@@ -13,5 +13,5 @@ public class SceneSwitcher : MonoBehaviour
     public void LoadScene(string Scene)
     {
         SceneManager.LoadScene(Scene);
-    
+    }
 }
