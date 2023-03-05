@@ -21,6 +21,7 @@ public class UnitManager : MonoBehaviour
     public float Health;
     SpriteRenderer spriteRenderer;
     GameObject text;
+    GameObject healthtext;
     Canvas TextCanvas;
 
     // Start is called before the first frame update
@@ -61,7 +62,12 @@ public class UnitManager : MonoBehaviour
     {
         //unit death
         if (Health <= 0)
+        {
+            if (healthtext != null)
+                Destroy(healthtext);
             gameObject.SetActive(false);
+        }
+
         if (Unit.tag == "Building")
         {
             if (!mUnit.GetFighting())
@@ -113,9 +119,11 @@ public class UnitManager : MonoBehaviour
     IEnumerator DisplayDamage()
     {
         Debug.Log("Display");
-        GameObject healthtext = Instantiate(text, gameObject.transform.position, Quaternion.identity);
+        healthtext = Instantiate(text, Vector3.zero, Quaternion.identity);
         healthtext.transform.SetParent(TextCanvas.transform, false);
-        healthtext.GetComponent<TextMeshProUGUI>().text = (HealthChange - Health).ToString();
+        healthtext.transform.position = Camera.main.WorldToScreenPoint(Rigidbody.transform.position);
+        healthtext.GetComponent<TextMeshProUGUI>().text = (Health - HealthChange).ToString();
+        healthtext.GetComponent<TextMeshProUGUI>().color = Color.red;
         yield return new WaitForSeconds(1);
         Destroy(healthtext);
         Debug.Log("Destroy");
