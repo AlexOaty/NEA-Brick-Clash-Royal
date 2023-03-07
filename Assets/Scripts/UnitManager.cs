@@ -42,6 +42,7 @@ public class UnitManager : MonoBehaviour
                 mUnit.AttackSpeed = unit.AttackSpeed;
                 mUnit.Health = unit.Health;
                 mUnit.KnockBack = unit.KnockBack;
+                mUnit.Cost = unit.Cost;
             }
         }
         mUnit.IsEnemy = IsEnemy;
