@@ -16,7 +16,7 @@ MonoBehaviour:
   attribute: Speed
   change: 0.1
   cost: 30
-  unlocked: 0
+  unlocked: 1
   purchased: 0
   LeftID: -1
   RightID: -1

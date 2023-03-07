@@ -64,12 +64,10 @@ public class TreeManager : MonoBehaviour
             abilityButton = GameObject.FindGameObjectWithTag(ability.ID);
             if (abilityButton != null)
             {
-                if (!ability.unlocked)
+                if (ability.unlocked)
                 {
-                    abilityButton.SetActive(false);
-                }
-                else
                     abilityButton.SetActive(true);
+                }
             }
         }
     }
