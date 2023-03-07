@@ -15,7 +15,7 @@ public class Unit : ScriptableObject
     public float Damage;
     public float AttackSpeed;
     public float KnockBack;
-    public float Cost;
+    public int Cost;
     public GameObject unit;
     public Rigidbody2D rb;
     public bool IsEnemy;

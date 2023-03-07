@@ -10,6 +10,7 @@ using UnityEngine.WSA;
 
 public class UnitSpawner : MonoBehaviour
 {
+    int BrickNum;
     UnitManager unitManager;
     GameManager gameManager;
     public GameObject Unit;
@@ -19,6 +20,7 @@ public class UnitSpawner : MonoBehaviour
     {
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         unitManager = Unit.GetComponent<UnitManager>();
+        BrickNum = unitManager.mUnit.Cost;
     }
     void Update()
     {
@@ -34,11 +36,11 @@ public class UnitSpawner : MonoBehaviour
     public void Spawn()
     {
         Vector3 MousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        if (Input.GetMouseButtonDown(0) && gameManager.BrickNum >= 1)
+        if (Input.GetMouseButtonDown(0) && gameManager.BrickNum >= BrickNum)
         {
             Instantiate(Unit, new Vector3(MousePosition.x, MousePosition.y, 0f), Quaternion.identity);
             isActive = false;
-            gameManager.BrickNum--;
+            gameManager.BrickNum -= BrickNum;
         }
     }
 }
