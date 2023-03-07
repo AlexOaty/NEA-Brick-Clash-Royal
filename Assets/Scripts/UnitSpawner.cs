@@ -20,7 +20,12 @@ public class UnitSpawner : MonoBehaviour
     {
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         unitManager = Unit.GetComponent<UnitManager>();
-        BrickNum = unitManager.mUnit.Cost;
+        UnitsDatabase UnitTypes = GameObject.FindGameObjectWithTag("UnitTypes").GetComponent<UnitsDatabase>();
+        foreach (Unit UnitType in UnitTypes.units)
+        {
+            if (UnitType.name == unitManager.name)
+                BrickNum = UnitType.Cost;
+        }
     }
     void Update()
     {
@@ -36,11 +41,14 @@ public class UnitSpawner : MonoBehaviour
     public void Spawn()
     {
         Vector3 MousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        if (Input.GetMouseButtonDown(0) && gameManager.BrickNum >= BrickNum)
+        if (Input.GetMouseButtonDown(0))
         {
-            Instantiate(Unit, new Vector3(MousePosition.x, MousePosition.y, 0f), Quaternion.identity);
             isActive = false;
-            gameManager.BrickNum -= BrickNum;
+            if (gameManager.BrickNum >= BrickNum)
+            {
+                Instantiate(Unit, new Vector3(MousePosition.x, MousePosition.y, 0f), Quaternion.identity);
+                gameManager.BrickNum -= BrickNum;
+            }
         }
     }
 }

@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 90444814}
   - component: {fileID: 90444813}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Spawn Ghost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -188,7 +188,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.5754717, g: 0.5754717, b: 0.5754717, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -446,7 +446,7 @@ GameObject:
   - component: {fileID: 494620767}
   - component: {fileID: 494620766}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Spawn Knight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1491,6 +1491,65 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 995864356}
   m_CullTransparentMesh: 1
+--- !u!1001 &1026965010
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 2
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3614988951150362067, guid: b82713fdf555a4b44b428607749050b5, type: 3}
+      propertyPath: m_Name
+      value: Ghost
+      objectReference: {fileID: 0}
+    - target: {fileID: 3614988951150362068, guid: b82713fdf555a4b44b428607749050b5, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3614988951150362068, guid: b82713fdf555a4b44b428607749050b5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.25983825
+      objectReference: {fileID: 0}
+    - target: {fileID: 3614988951150362068, guid: b82713fdf555a4b44b428607749050b5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.70414513
+      objectReference: {fileID: 0}
+    - target: {fileID: 3614988951150362068, guid: b82713fdf555a4b44b428607749050b5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3614988951150362068, guid: b82713fdf555a4b44b428607749050b5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3614988951150362068, guid: b82713fdf555a4b44b428607749050b5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3614988951150362068, guid: b82713fdf555a4b44b428607749050b5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3614988951150362068, guid: b82713fdf555a4b44b428607749050b5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3614988951150362068, guid: b82713fdf555a4b44b428607749050b5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3614988951150362068, guid: b82713fdf555a4b44b428607749050b5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3614988951150362068, guid: b82713fdf555a4b44b428607749050b5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_AddedGameObjects: []
+  m_SourcePrefab: {fileID: 100100000, guid: b82713fdf555a4b44b428607749050b5, type: 3}
 --- !u!1 &1056727681
 GameObject:
   m_ObjectHideFlags: 0
@@ -2956,7 +3015,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1372403417425110958, guid: e75d329d4c4649b4585b521ae3a68a8d, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1372403417425110958, guid: e75d329d4c4649b4585b521ae3a68a8d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3000,7 +3059,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1372403417425110963, guid: e75d329d4c4649b4585b521ae3a68a8d, type: 3}
       propertyPath: m_Name
-      value: PlayerUnit
+      value: Knight
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -26162,7 +26221,7 @@ RectTransform:
   - {fileID: 995864357}
   - {fileID: 90444812}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -26339,7 +26398,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 600049447943442289, guid: 717fbb99935450f46827a04a07620a82, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 600049447943442289, guid: 717fbb99935450f46827a04a07620a82, type: 3}
       propertyPath: m_LocalPosition.x
@@ -26461,7 +26520,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5894190841186304721, guid: c5ed38c476127404ebf18198624a7de5, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5894190841186304721, guid: c5ed38c476127404ebf18198624a7de5, type: 3}
       propertyPath: m_LocalPosition.x

@@ -17,7 +17,7 @@ MonoBehaviour:
   change: 0.1
   cost: 30
   unlocked: 1
-  purchased: 0
+  purchased: 1
   LeftID: -1
   RightID: -1
   left: -1
