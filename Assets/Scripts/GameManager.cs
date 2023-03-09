@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     GameObject Canvas;
-    float BrickNum;
+    public float BrickNum;
     bool BrickAdding;
     public Button Spawner;
     public GameObject[] hand;
