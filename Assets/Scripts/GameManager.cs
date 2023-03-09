@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
                     Newbutton.GetComponentInChildren<TextMeshProUGUI>().text = $"Spawn {Unit.name} - {unittype.Cost} Bricks";
                 }
             }
-            x += 1;
+            x += 1.3f;
         }
     }
 
