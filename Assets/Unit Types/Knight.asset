@@ -16,7 +16,7 @@ MonoBehaviour:
   Health: 20
   Damage: 5
   AttackSpeed: 4
-  KnockBack: 6
+  KnockBack: 30
   Cost: 1
   unit: {fileID: 0}
   rb: {fileID: 0}

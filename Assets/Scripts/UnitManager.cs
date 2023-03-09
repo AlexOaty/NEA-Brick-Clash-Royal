@@ -120,6 +120,10 @@ public class UnitManager : MonoBehaviour
     IEnumerator DisplayDamage()
     {
         Debug.Log("Display");
+        if (healthtext != null)
+        {
+            Destroy(healthtext);
+        }
         healthtext = Instantiate(text, Vector3.zero, Quaternion.identity);
         healthtext.transform.SetParent(TextCanvas.transform, false);
         healthtext.transform.position = Camera.main.WorldToScreenPoint(Rigidbody.transform.position);
