@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f217c0636b09204e97f34e14f2f8057, type: 3}
   m_Name: Knight
   m_EditorClassIdentifier: 
-  speed: 0.88
-  Health: 24
+  speed: 0.8
+  Health: 20
   Damage: 5
-  AttackSpeed: 3.6
-  KnockBack: 6
+  AttackSpeed: 4
+  KnockBack: 30
   Cost: 1
   unit: {fileID: 0}
   rb: {fileID: 0}
