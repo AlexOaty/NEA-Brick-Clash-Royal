@@ -184,42 +184,69 @@ public class Unit : ScriptableObject
         return IsEnemy;
     }
 
-    public bool CheckBuildings()
+    //public bool CheckBuildings()
+    //{
+    //    float distance;
+    //    Vector3 direction;
+    //    Buildings = GameObject.FindGameObjectsWithTag("Building");
+    //    try
+    //    {
+    //        CurrentOpponent = Buildings[0];
+    //    }
+    //    catch (IndexOutOfRangeException)
+    //    {
+    //        return false;
+    //    }
+    //    foreach (GameObject Building in Buildings)
+    //    {
+    //        float CheckDist = Vector3.Distance(unit.transform.position, Building.transform.position);
+    //        float CurrentDist = Vector3.Distance(unit.transform.position, CurrentOpponent.transform.position);
+    //        if (CheckDist < CurrentDist && Building != unit)
+    //        {
+    //            CurrentOpponent = Building;
+    //        }
+    //    }
+    //    distance = Vector3.Distance(unit.transform.position, CurrentOpponent.transform.position);
+    //    if (distance > 0.3)
+    //    {
+    //        direction = CurrentOpponent.transform.position - unit.transform.position;
+    //        rb.AddForce(direction / distance * speed);
+    //        return false;
+    //    }
+    //    else
+    //    {
+    //        FightingUnit = true;
+    //        return true;
+    //    }
+
+
+    //}
+
+    public bool AttackCastle()
     {
         float distance;
         Vector3 direction;
-        Buildings = GameObject.FindGameObjectsWithTag("Building");
-        try
+        GameObject[] Castles = GameObject.FindGameObjectsWithTag("Castle");
+        foreach (GameObject Castle in Castles)
         {
-            CurrentOpponent = Buildings[0];
-        }
-        catch (IndexOutOfRangeException)
-        {
-            return false;
-        }
-        foreach (GameObject Building in Buildings)
-        {
-            float CheckDist = Vector3.Distance(unit.transform.position, Building.transform.position);
-            float CurrentDist = Vector3.Distance(unit.transform.position, CurrentOpponent.transform.position);
-            if (CheckDist < CurrentDist && Building != unit)
+            if (Castle.GetComponent<UnitManager>().IsEnemy != IsEnemy)
             {
-                CurrentOpponent = Building;
+                distance = Vector3.Distance(unit.transform.position, Castle.transform.position);
+                if (distance > 0.3)
+                {
+                    direction = Castle.transform.position - unit.transform.position;
+                    rb.AddForce(direction / distance * speed);
+                    return false;
+                }
+                else
+                {
+                    CurrentOpponent = Castle;
+                    FightingUnit = true;
+                    return true;
+                }
             }
         }
-        distance = Vector3.Distance(unit.transform.position, CurrentOpponent.transform.position);
-        if (distance > 0.3)
-        {
-            direction = CurrentOpponent.transform.position - unit.transform.position;
-            rb.AddForce(direction / distance * speed);
-            return false;
-        }
-        else
-        {
-            FightingUnit = true;
-            return true;
-        }
-
-
+        return false;
     }
 
     public bool GetEndOfPath()

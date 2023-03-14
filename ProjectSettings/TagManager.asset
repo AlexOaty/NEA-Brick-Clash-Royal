@@ -16,6 +16,13 @@ TagManager:
   - BottomRight
   - Left
   - Right
+  - GameManager
+  - HealthText
+  - Canvas
+  - UnitPlayer
+  - UnitEnemy
+  - UnitTypes
+  - Castle
   layers:
   - Default
   - TransparentFX

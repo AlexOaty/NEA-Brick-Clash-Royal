@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public float BrickNum;
     bool BrickAdding;
     public Button Spawner;
+    UnitsDatabase UnitTypes;
     public GameObject[] hand;
     public GameObject Tower;
     public UnitManager PlayerCastle;
@@ -18,12 +19,16 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI Bricks;
     public TextMeshProUGUI PlayerCastleHealth;
     public TextMeshProUGUI EnemyCastleHealth;
+    public TextMeshProUGUI Timer;
+    float CurrentTime;
 
     void Start()
     {
+        UnitTypes = GameObject.FindGameObjectWithTag("UnitTypes").GetComponent<UnitsDatabase>();
         Canvas = GameObject.FindGameObjectWithTag("Canvas");
-        BrickNum = 2;
+        BrickNum = 30;
         BrickAdding = true;
+        CurrentTime = 10;
         StartCoroutine(BuildPhase());
     }
 
@@ -32,9 +37,8 @@ public class GameManager : MonoBehaviour
         float x, y;
         x = -1.2f;
         y = -1;
-        Button Newbutton = Instantiate(Spawner, Camera.main.WorldToScreenPoint(new Vector3(x, y)), Quaternion.identity, Canvas.transform);
-        Newbutton.GetComponent<UnitSpawner>().Unit = Tower;
-        Newbutton.GetComponentInChildren<TextMeshProUGUI>().text = $"Spawn Tower - 1 Bricks";
+        Button Newbutton = AddButton(x, y, Tower);
+        Newbutton.GetComponentInChildren<TextMeshProUGUI>().text = $"Spawn Tower - 1 Brick";
         yield return new WaitForSeconds(10);
         BrickNum = 0;
         BrickAdding = false;
@@ -46,15 +50,13 @@ public class GameManager : MonoBehaviour
         float x, y;
         x = -1.2f;
         y = -1;
-        UnitsDatabase UnitTypes = GameObject.FindGameObjectWithTag("UnitTypes").GetComponent<UnitsDatabase>();
         foreach (GameObject Unit in hand)
         {
             foreach (Unit unittype in UnitTypes.units)
             {
                 if (unittype.name == Unit.name)
                 {
-                    Button Newbutton = Instantiate(Spawner, Camera.main.WorldToScreenPoint(new Vector3(x, y)), Quaternion.identity, Canvas.transform);
-                    Newbutton.GetComponent<UnitSpawner>().Unit = Unit;
+                    Button Newbutton = AddButton(x, y, Unit);
                     Newbutton.GetComponentInChildren<TextMeshProUGUI>().text = $"Spawn {Unit.name} - {unittype.Cost} Bricks";
                 }
             }
@@ -62,9 +64,21 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    Button AddButton(float x, float y, GameObject Unit)
+    {
+        Button Newbutton = Instantiate(Spawner, Camera.main.WorldToScreenPoint(new Vector3(x, y)), Quaternion.identity, Canvas.transform);
+        Newbutton.GetComponent<UnitSpawner>().Unit = Unit;
+        return Newbutton;
+    }
+
     // Update is called once per frame
     void Update()
     {
+        if (CurrentTime > 0)
+        {
+            CurrentTime -= Time.deltaTime;
+        }
+        Timer.text = CurrentTime.ToString();
         Bricks.text = "Bricks: " + BrickNum.ToString();
         PlayerCastleHealth.text = "Castle Health: " + PlayerCastle.Health.ToString();
         if(BrickNum<5 && !BrickAdding) 

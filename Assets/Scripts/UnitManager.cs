@@ -91,7 +91,7 @@ public class UnitManager : MonoBehaviour
                 mUnit.SetFighting(mUnit.CheckEnemies());
 
                 if (!mUnit.GetFighting())
-                    mUnit.SetFighting(mUnit.CheckBuildings());
+                    mUnit.SetFighting(mUnit.AttackCastle());
             }
             //Attack enemy unit
             else if (mUnit.GetFighting() && !AttackUnitRun)
