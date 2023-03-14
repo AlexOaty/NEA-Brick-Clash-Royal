@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     bool BrickAdding;
     public Button Spawner;
     public GameObject[] hand;
+    public GameObject Tower;
     public UnitManager PlayerCastle;
     public UnitManager EnemyCastle;
     public TextMeshProUGUI Bricks;
@@ -21,11 +22,30 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Canvas = GameObject.FindGameObjectWithTag("Canvas");
+        BrickNum = 2;
+        BrickAdding = true;
+        StartCoroutine(BuildPhase());
+    }
+
+    IEnumerator BuildPhase()
+    {
         float x, y;
         x = -1.2f;
         y = -1;
+        Button Newbutton = Instantiate(Spawner, Camera.main.WorldToScreenPoint(new Vector3(x, y)), Quaternion.identity, Canvas.transform);
+        Newbutton.GetComponent<UnitSpawner>().Unit = Tower;
+        Newbutton.GetComponentInChildren<TextMeshProUGUI>().text = $"Spawn Tower - 1 Bricks";
+        yield return new WaitForSeconds(10);
         BrickNum = 0;
         BrickAdding = false;
+        StartCoroutine("AttackPhase");
+    }
+
+    void AttackPhase()
+    {
+        float x, y;
+        x = -1.2f;
+        y = -1;
         UnitsDatabase UnitTypes = GameObject.FindGameObjectWithTag("UnitTypes").GetComponent<UnitsDatabase>();
         foreach (GameObject Unit in hand)
         {

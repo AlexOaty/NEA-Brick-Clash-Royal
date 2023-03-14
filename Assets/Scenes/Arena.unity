@@ -172,6 +172,7 @@ MonoBehaviour:
   hand:
   - {fileID: 3614988951150362067, guid: b82713fdf555a4b44b428607749050b5, type: 3}
   - {fileID: 1372403417425110963, guid: e75d329d4c4649b4585b521ae3a68a8d, type: 3}
+  Tower: {fileID: 600049447943442300, guid: b4e821d1161dd8c43bfe9952b3738c01, type: 3}
   PlayerCastle: {fileID: 3614988951150361896, guid: d04a157340384fa4285b8c63d904e75e, type: 3}
   EnemyCastle: {fileID: 0}
   Bricks: {fileID: 580553305}
@@ -1222,6 +1223,10 @@ PrefabInstance:
     - target: {fileID: 3614988951150362067, guid: b82713fdf555a4b44b428607749050b5, type: 3}
       propertyPath: m_Name
       value: Ghost
+      objectReference: {fileID: 0}
+    - target: {fileID: 3614988951150362067, guid: b82713fdf555a4b44b428607749050b5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3614988951150362068, guid: b82713fdf555a4b44b428607749050b5, type: 3}
       propertyPath: m_RootOrder
@@ -2780,6 +2785,10 @@ PrefabInstance:
     - target: {fileID: 1372403417425110963, guid: e75d329d4c4649b4585b521ae3a68a8d, type: 3}
       propertyPath: m_Name
       value: Knight
+      objectReference: {fileID: 0}
+    - target: {fileID: 1372403417425110963, guid: e75d329d4c4649b4585b521ae3a68a8d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -26167,6 +26176,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 3614988951150362067, guid: d04a157340384fa4285b8c63d904e75e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3614988951150362068, guid: d04a157340384fa4285b8c63d904e75e, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -26226,6 +26239,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: UnitTypes
       objectReference: {fileID: 0}
+    - target: {fileID: 5894190841186304720, guid: c5ed38c476127404ebf18198624a7de5, type: 3}
+      propertyPath: units.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5894190841186304720, guid: c5ed38c476127404ebf18198624a7de5, type: 3}
+      propertyPath: units.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 5e1f6484b85256f47afed96968ba7797, type: 2}
     - target: {fileID: 5894190841186304721, guid: c5ed38c476127404ebf18198624a7de5, type: 3}
       propertyPath: m_RootOrder
       value: 7
