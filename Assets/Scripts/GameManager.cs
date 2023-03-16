@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -68,7 +69,12 @@ public class GameManager : MonoBehaviour
 
     void EnemySpawner()
     {
-        Instantiate(EnemyUnit, new Vector3(-0.341f, 0.7f), Quaternion.identity);
+        System.Random Rand = new System.Random();
+        int Side = Rand.Next(2);
+        if (Side == 1)
+            Instantiate(EnemyUnit, new Vector3(-0.341f, 0.7f), Quaternion.identity);
+        else
+            Instantiate(EnemyUnit, new Vector3(0.41f, 0.6f), Quaternion.identity);
     }
 
     Button AddButton(float x, float y, GameObject Unit)
