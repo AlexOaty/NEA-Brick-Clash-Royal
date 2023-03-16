@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3614988951150361897}
   m_Layer: 0
   m_Name: Ghost
-  m_TagString: UnitPlayer
+  m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

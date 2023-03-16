@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     UnitsDatabase UnitTypes;
     public GameObject[] hand;
     public GameObject Tower;
+    public GameObject EnemyUnit;
     public UnitManager PlayerCastle;
     public UnitManager EnemyCastle;
     public TextMeshProUGUI Bricks;
@@ -26,10 +27,11 @@ public class GameManager : MonoBehaviour
     {
         UnitTypes = GameObject.FindGameObjectWithTag("UnitTypes").GetComponent<UnitsDatabase>();
         Canvas = GameObject.FindGameObjectWithTag("Canvas");
-        BrickNum = 30;
+        BrickNum = 2;
         BrickAdding = true;
         CurrentTime = 10;
         StartCoroutine(BuildPhase());
+        InvokeRepeating("EnemySpawner", 10, 8);
     }
 
     IEnumerator BuildPhase()
@@ -62,6 +64,11 @@ public class GameManager : MonoBehaviour
             }
             x += 1.3f;
         }
+    }
+
+    void EnemySpawner()
+    {
+        Instantiate(EnemyUnit, new Vector3(-0.341f, 0.7f), Quaternion.identity);
     }
 
     Button AddButton(float x, float y, GameObject Unit)

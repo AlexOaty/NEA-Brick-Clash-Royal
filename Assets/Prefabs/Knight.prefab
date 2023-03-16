@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1372403417425110962}
   m_Layer: 0
   m_Name: Knight
-  m_TagString: UnitPlayer
+  m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -120,8 +120,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 668ec170ce8722d4ab301d62a74d5f18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mUnit: {fileID: 0}
   IsEnemy: 0
   UnitType: Knight
+  Health: 0
 --- !u!58 &1372403417425110962
 CircleCollider2D:
   m_ObjectHideFlags: 0

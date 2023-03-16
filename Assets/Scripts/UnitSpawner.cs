@@ -47,8 +47,11 @@ public class UnitSpawner : MonoBehaviour
             isActive = false;
             if (gameManager.BrickNum >= BrickNum)
             {
-                Instantiate(Unit, new Vector3(MousePosition.x, MousePosition.y, 0f), Quaternion.identity);
-                gameManager.BrickNum -= BrickNum;
+                if ((MousePosition.x >= -0.6 && MousePosition.x <= 0.72 && MousePosition.y >= -0.98 && MousePosition.y < 0.14) || Unit.GetComponent<UnitManager>().IsEnemy)
+                {
+                    Instantiate(Unit, new Vector3(MousePosition.x, MousePosition.y, 0f), Quaternion.identity);
+                    gameManager.BrickNum -= BrickNum;
+                }
             }
         }
     }

@@ -29,7 +29,7 @@ public class Unit : ScriptableObject
     bool EndOfPath;
     bool FightingUnit;
     //public bool FightingBuilding;
-    GameObject[] Opponents;
+    List<GameObject> Opponents;
     GameObject CurrentOpponent;
     GameObject[] Buildings;
 
@@ -141,18 +141,20 @@ public class Unit : ScriptableObject
     {
         //Checks the units area for any enemy units and stops the unit if they are in range
         bool InRange = false;
-        if (IsEnemy)
-            Opponents = GameObject.FindGameObjectsWithTag("UnitPlayer");
-        else
-            Opponents = GameObject.FindGameObjectsWithTag("UnitEnemy");
-        try
+        GameObject[] AllUnits = GameObject.FindGameObjectsWithTag("Unit");
+        Opponents = new List<GameObject>();
+        foreach (GameObject Unit in AllUnits)
         {
-            CurrentOpponent = Opponents[0];
-
+            if (Unit.GetComponent<UnitManager>().IsEnemy != IsEnemy)
+                Opponents.Add(Unit);
         }
-        catch (IndexOutOfRangeException)
+        if (Opponents.Count == 0)
         {
             return false;
+        }
+        else
+        {
+            CurrentOpponent = Opponents[0];
         }
         foreach (GameObject opponent in Opponents)
         {
