@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   Health: 10
-  Damage: 5
-  AttackSpeed: 7
+  Damage: 1
+  AttackSpeed: 2
   KnockBack: 5
   Cost: 1
   unit: {fileID: 0}
