@@ -134,7 +134,7 @@ public class UnitManager : MonoBehaviour
         Debug.Log("Destroy");
     }
 
-    public void SayOuch()
+    public static void SayOuch()
     {
         Debug.Log("I was hit");
     }
@@ -150,7 +150,7 @@ public class UnitManager : MonoBehaviour
             yield return new WaitForSeconds(mUnit.AttackSpeed);
             Debug.Log($"{Unit.tag} Attacking");
             Victim.Health -= mUnit.Damage;
-            Victim.SayOuch();
+            UnitManager.SayOuch();
         }
         AttackUnitRun = false;
     }
