@@ -12,7 +12,7 @@ using UnityEngine.UIElements;
 public class UnitManager : MonoBehaviour
 {
     public Unit mUnit;
-    GameObject Unit;
+    GameObject unit;
     Rigidbody2D Rigidbody;
     public bool IsEnemy;
     float HealthChange;
@@ -29,7 +29,7 @@ public class UnitManager : MonoBehaviour
     {
         text = GameObject.FindGameObjectWithTag("HealthText");
         TextCanvas = FindObjectOfType<Canvas>();
-        Unit = gameObject;
+        unit = gameObject;
         Rigidbody = GetComponent<Rigidbody2D>();
         UnitsDatabase UnitTypes = GameObject.FindGameObjectWithTag("UnitTypes").GetComponent<UnitsDatabase>();
         foreach (Unit unit in UnitTypes.units)
@@ -46,7 +46,7 @@ public class UnitManager : MonoBehaviour
             }
         }
         mUnit.IsEnemy = IsEnemy;
-        mUnit.unit = Unit;
+        mUnit.unit = unit;
         mUnit.rb = Rigidbody;
         Health = mUnit.Health;
         HealthChange = Health;
@@ -69,7 +69,7 @@ public class UnitManager : MonoBehaviour
             gameObject.SetActive(false);
         }
 
-        if (Unit.tag == "Building")
+        if (unit.tag == "Building")
         {
             if (!mUnit.GetFighting())
                 mUnit.SetFighting(mUnit.CheckEnemies());
@@ -134,7 +134,7 @@ public class UnitManager : MonoBehaviour
         Debug.Log("Destroy");
     }
 
-    public void SayOuch()
+    public static void SayOuch()
     {
         Debug.Log("I was hit");
     }
@@ -143,14 +143,14 @@ public class UnitManager : MonoBehaviour
     {
         AttackUnitRun = true;
         UnitManager Victim = (UnitManager)mUnit.GetCurrentOpponent().GetComponent("UnitManager");
-        if (Vector3.Distance(Unit.transform.position, Victim.transform.position) > 0.3 || Victim.Health <= 0)
+        if (Unit.GetDistance(unit.transform.position, Victim.transform.position) > 0.3 || Victim.Health <= 0)
             mUnit.SetFighting(false);
         else
         {
             yield return new WaitForSeconds(mUnit.AttackSpeed);
-            Debug.Log($"{Unit.tag} Attacking");
+            Debug.Log($"{unit.tag} Attacking");
             Victim.Health -= mUnit.Damage;
-            Victim.SayOuch();
+            UnitManager.SayOuch();
         }
         AttackUnitRun = false;
     }
