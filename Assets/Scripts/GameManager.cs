@@ -22,10 +22,12 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI PlayerCastleHealth;
     public TextMeshProUGUI EnemyCastleHealth;
     public TextMeshProUGUI Timer;
+    HandQueue Queue;
     float CurrentTime;
 
     void Start()
     {
+        Queue = new HandQueue(4);
         UnitTypes = GameObject.FindGameObjectWithTag("UnitTypes").GetComponent<UnitsDatabase>();
         Canvas = GameObject.FindGameObjectWithTag("Canvas");
         BrickNum = 2;
@@ -45,25 +47,38 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(10);
         BrickNum = 0;
         BrickAdding = false;
+        StartCoroutine("StartCards");
+    }
+    void StartCards()
+    {
+        foreach (GameObject Unit in hand)
+        {
+            Queue.Add(Unit);
+        }
         StartCoroutine("AttackPhase");
     }
 
-    void AttackPhase()
+void AttackPhase()
     {
+        GameObject NewUnit = null;
+        int Cost = 0;
         float x, y;
         x = -1.2f;
         y = -1;
-        foreach (GameObject Unit in hand)
+
+        for (int i = 0; i < 3; i++)
         {
+            NewUnit = Queue.Data[Queue.Front+i];
             foreach (Unit unittype in UnitTypes.units)
             {
-                if (unittype.name == Unit.name)
+                if (unittype.name == NewUnit.name)
                 {
-                    Button Newbutton = AddButton(x, y, Unit);
-                    Newbutton.GetComponentInChildren<TextMeshProUGUI>().text = $"Spawn {Unit.name} - {unittype.Cost} Bricks";
+                    Cost = unittype.Cost;
                 }
             }
-            x += 1.3f;
+            Button Newbutton = AddButton(x, y, NewUnit);
+            Newbutton.GetComponentInChildren<TextMeshProUGUI>().text = $"Spawn {NewUnit.name} - {Cost} Bricks";
+            x += 1;
         }
     }
 
@@ -106,5 +121,11 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(5);
         BrickNum++;
         BrickAdding = false;
+    }
+
+    public void SwapQueue()
+    {
+        Queue.Up();
+        StartCoroutine("AttackPhase");
     }
 }
