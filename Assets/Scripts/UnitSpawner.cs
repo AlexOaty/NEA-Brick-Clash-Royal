@@ -51,6 +51,10 @@ public class UnitSpawner : MonoBehaviour
                 {
                     Instantiate(Unit, new Vector3(MousePosition.x, MousePosition.y, 0f), Quaternion.identity);
                     gameManager.BrickNum -= BrickNum;
+                    if(Unit.name != "Tower")
+                    {
+                        gameManager.SwapQueue();
+                    }
                 }
             }
         }
