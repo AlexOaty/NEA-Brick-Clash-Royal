@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     bool BrickAdding;
     public Button Spawner;
     UnitsDatabase UnitTypes;
-    public GameObject[] hand;
+    public GameObject[] Deck;
     public GameObject Tower;
     public GameObject EnemyUnit;
     public UnitManager PlayerCastle;
@@ -22,12 +22,12 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI PlayerCastleHealth;
     public TextMeshProUGUI EnemyCastleHealth;
     public TextMeshProUGUI Timer;
-    HandQueue Queue;
+    List<GameObject> Hand;
     float CurrentTime;
 
     void Start()
     {
-        Queue = new HandQueue(4);
+        Hand = new List<GameObject>();
         UnitTypes = GameObject.FindGameObjectWithTag("UnitTypes").GetComponent<UnitsDatabase>();
         Canvas = GameObject.FindGameObjectWithTag("Canvas");
         BrickNum = 2;
@@ -51,9 +51,9 @@ public class GameManager : MonoBehaviour
     }
     void StartCards()
     {
-        foreach (GameObject Unit in hand)
+        for (int i = 0; i<Deck.Length; i++)
         {
-            Queue.Add(Unit);
+            Hand.Add(Deck[i]);
         }
         StartCoroutine("AttackPhase");
     }
@@ -68,7 +68,7 @@ void AttackPhase()
 
         for (int i = 0; i < 3; i++)
         {
-            NewUnit = Queue.Data[Queue.Front+i];
+            NewUnit = Hand[i];
             foreach (Unit unittype in UnitTypes.units)
             {
                 if (unittype.name == NewUnit.name)
@@ -78,7 +78,7 @@ void AttackPhase()
             }
             Button Newbutton = AddButton(x, y, NewUnit);
             Newbutton.GetComponentInChildren<TextMeshProUGUI>().text = $"Spawn {NewUnit.name} - {Cost} Bricks";
-            x += 1;
+            x += 1.3f;
         }
     }
 
@@ -123,9 +123,10 @@ void AttackPhase()
         BrickAdding = false;
     }
 
-    public void SwapQueue()
+    public void MoveToBack(GameObject Button)
     {
-        Queue.Up();
+        Hand.Remove(Button);
         StartCoroutine("AttackPhase");
+        Hand.Add(Button);
     }
 }

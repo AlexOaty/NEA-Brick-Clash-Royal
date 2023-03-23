@@ -53,7 +53,7 @@ public class UnitSpawner : MonoBehaviour
                     gameManager.BrickNum -= BrickNum;
                     if(Unit.name != "Tower")
                     {
-                        gameManager.SwapQueue();
+                        gameManager.MoveToBack(Unit);
                     }
                 }
             }

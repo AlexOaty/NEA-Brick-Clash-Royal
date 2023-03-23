@@ -23,6 +23,7 @@ public class UnitManager : MonoBehaviour
     GameObject text;
     GameObject healthtext;
     Canvas TextCanvas;
+    UnitsDatabase UnitTypes;
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +32,7 @@ public class UnitManager : MonoBehaviour
         TextCanvas = FindObjectOfType<Canvas>();
         unit = gameObject;
         Rigidbody = GetComponent<Rigidbody2D>();
-        UnitsDatabase UnitTypes = GameObject.FindGameObjectWithTag("UnitTypes").GetComponent<UnitsDatabase>();
+        UnitTypes = GameObject.FindGameObjectWithTag("UnitTypes").GetComponent<UnitsDatabase>();
         foreach (Unit unit in UnitTypes.units)
         {
             if (unit.name == UnitType)
@@ -66,6 +67,21 @@ public class UnitManager : MonoBehaviour
         {
             if (healthtext != null)
                 Destroy(healthtext);
+            foreach (Unit unittype in UnitTypes.units)
+            {
+                if (unittype.name == gameObject.name.Split()[0] && unittype.name == "Castle")
+                {
+                    if (!IsEnemy)
+                    {
+                        Debug.Log("YOU LOST");
+                    }
+                    else
+                    {
+                        Debug.Log("YOU WIN");
+                    }
+
+                }
+            }
             gameObject.SetActive(false);
         }
 

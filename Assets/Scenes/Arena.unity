@@ -169,11 +169,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BrickNum: 0
   Spawner: {fileID: 494620766}
-  hand:
-  - {fileID: 3614988951150362067, guid: b82713fdf555a4b44b428607749050b5, type: 3}
+  Deck:
   - {fileID: 1372403417425110963, guid: e75d329d4c4649b4585b521ae3a68a8d, type: 3}
+  - {fileID: 3614988951150362067, guid: b82713fdf555a4b44b428607749050b5, type: 3}
   - {fileID: 7006618025223508766, guid: bd858b7779996154d978c70a58612b9f, type: 3}
-  - {fileID: 600049447943442300, guid: 717fbb99935450f46827a04a07620a82, type: 3}
+  - {fileID: 7544340460271624800, guid: c25169cc5f4380c4e9f585e5945b5453, type: 3}
   Tower: {fileID: 600049447943442300, guid: b4e821d1161dd8c43bfe9952b3738c01, type: 3}
   EnemyUnit: {fileID: 3614988951150362067, guid: d04a157340384fa4285b8c63d904e75e, type: 3}
   PlayerCastle: {fileID: 3614988951150361896, guid: d04a157340384fa4285b8c63d904e75e, type: 3}
@@ -26232,7 +26232,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5894190841186304720, guid: c5ed38c476127404ebf18198624a7de5, type: 3}
       propertyPath: units.Array.size
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5894190841186304720, guid: c5ed38c476127404ebf18198624a7de5, type: 3}
       propertyPath: units.Array.data[3]
@@ -26242,6 +26242,10 @@ PrefabInstance:
       propertyPath: units.Array.data[4]
       value: 
       objectReference: {fileID: 11400000, guid: 9ff54aff0b45ea84d81ef6e3016b13ea, type: 2}
+    - target: {fileID: 5894190841186304720, guid: c5ed38c476127404ebf18198624a7de5, type: 3}
+      propertyPath: units.Array.data[5]
+      value: 
+      objectReference: {fileID: 11400000, guid: 47dfced898b5887409c2172ecbd45696, type: 2}
     - target: {fileID: 5894190841186304721, guid: c5ed38c476127404ebf18198624a7de5, type: 3}
       propertyPath: m_RootOrder
       value: 5
