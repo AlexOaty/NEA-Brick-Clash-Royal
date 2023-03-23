@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f217c0636b09204e97f34e14f2f8057, type: 3}
   m_Name: Dwarf
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 2
   Health: 30
   Damage: 4
   AttackSpeed: 2
