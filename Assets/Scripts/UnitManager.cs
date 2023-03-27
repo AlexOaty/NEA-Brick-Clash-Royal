@@ -5,13 +5,14 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 using UnityEngine.UIElements;
 
 
 public class UnitManager : MonoBehaviour
 {
     public Unit mUnit;
-    GameObject Unit;
+    GameObject unit;
     Rigidbody2D Rigidbody;
     public bool IsEnemy;
     float HealthChange;
@@ -19,15 +20,19 @@ public class UnitManager : MonoBehaviour
     public string UnitType;
     public float Health;
     SpriteRenderer spriteRenderer;
-    TextMeshProUGUI textMeshProUGUI;
+    GameObject text;
+    GameObject healthtext;
+    Canvas TextCanvas;
+    UnitsDatabase UnitTypes;
 
     // Start is called before the first frame update
     void Start()
     {
-        textMeshProUGUI = GameObject.FindGameObjectWithTag("HealthText").GetComponent<TextMeshProUGUI>();
-        Unit = gameObject;
+        text = GameObject.FindGameObjectWithTag("HealthText");
+        TextCanvas = FindObjectOfType<Canvas>();
+        unit = gameObject;
         Rigidbody = GetComponent<Rigidbody2D>();
-        UnitsDatabase UnitTypes = GameObject.FindGameObjectWithTag("UnitTypes").GetComponent<UnitsDatabase>();
+        UnitTypes = GameObject.FindGameObjectWithTag("UnitTypes").GetComponent<UnitsDatabase>();
         foreach (Unit unit in UnitTypes.units)
         {
             if (unit.name == UnitType)
@@ -38,10 +43,11 @@ public class UnitManager : MonoBehaviour
                 mUnit.AttackSpeed = unit.AttackSpeed;
                 mUnit.Health = unit.Health;
                 mUnit.KnockBack = unit.KnockBack;
+                mUnit.Cost = unit.Cost;
             }
         }
         mUnit.IsEnemy = IsEnemy;
-        mUnit.unit = Unit;
+        mUnit.unit = unit;
         mUnit.rb = Rigidbody;
         Health = mUnit.Health;
         HealthChange = Health;
@@ -58,8 +64,28 @@ public class UnitManager : MonoBehaviour
     {
         //unit death
         if (Health <= 0)
+        {
+            if (healthtext != null)
+                Destroy(healthtext);
+            foreach (Unit unittype in UnitTypes.units)
+            {
+                if (unittype.name == gameObject.name.Split()[0] && unittype.name == "Castle")
+                {
+                    if (!IsEnemy)
+                    {
+                        Debug.Log("YOU LOST");
+                    }
+                    else
+                    {
+                        Debug.Log("YOU WIN");
+                    }
+
+                }
+            }
             gameObject.SetActive(false);
-        if (Unit.tag == "Building")
+        }
+
+        if (unit.tag == "Building")
         {
             if (!mUnit.GetFighting())
                 mUnit.SetFighting(mUnit.CheckEnemies());
@@ -81,27 +107,50 @@ public class UnitManager : MonoBehaviour
                 mUnit.SetFighting(mUnit.CheckEnemies());
 
                 if (!mUnit.GetFighting())
-                    mUnit.SetFighting(mUnit.CheckBuildings());
+                    mUnit.SetFighting(mUnit.AttackCastle());
             }
             //Attack enemy unit
             else if (mUnit.GetFighting() && !AttackUnitRun)
                 if (mUnit.AttackSpeed != -1)
                     StartCoroutine(AttackUnit());
-            //Knocks the player back when they lose health
-            if (Health < HealthChange)
-            {
-                UnitManager Enemy = (UnitManager)mUnit.GetCurrentOpponent().GetComponent("UnitManager");
-                if (mUnit.IsEnemy)
-                    Rigidbody.AddForce((Rigidbody.transform.position + new Vector3(0, 1, 0)) * Enemy.mUnit.KnockBack);
-                else
-                    Rigidbody.AddForce((Rigidbody.transform.position - new Vector3(0, 1, 0)) * Enemy.mUnit.KnockBack);
-                HealthChange = Health;
-            }
         }
 
     }
 
-    public void SayOuch()
+    void Update()
+    {
+        if (Health < HealthChange)
+        {
+            StartCoroutine(DisplayDamage());
+            UnitManager Enemy = (UnitManager)mUnit.GetCurrentOpponent().GetComponent("UnitManager");
+            if (mUnit.IsEnemy)
+                Rigidbody.AddForce((Rigidbody.transform.position + new Vector3(0, 1, 0)) * Enemy.mUnit.KnockBack);
+            else
+                Rigidbody.AddForce((Rigidbody.transform.position - new Vector3(0, 1, 0)) * Enemy.mUnit.KnockBack);
+            HealthChange = Health;
+        }
+    }
+
+    
+
+    IEnumerator DisplayDamage()
+    {
+        Debug.Log("Display");
+        if (healthtext != null)
+        {
+            Destroy(healthtext);
+        }
+        healthtext = Instantiate(text, Vector3.zero, Quaternion.identity);
+        healthtext.transform.SetParent(TextCanvas.transform, false);
+        healthtext.transform.position = Camera.main.WorldToScreenPoint(Rigidbody.transform.position);
+        healthtext.GetComponent<TextMeshProUGUI>().text = (Health - HealthChange).ToString();
+        healthtext.GetComponent<TextMeshProUGUI>().color = Color.red;
+        yield return new WaitForSeconds(1);
+        Destroy(healthtext);
+        Debug.Log("Destroy");
+    }
+
+    public static void SayOuch()
     {
         Debug.Log("I was hit");
     }
@@ -110,16 +159,14 @@ public class UnitManager : MonoBehaviour
     {
         AttackUnitRun = true;
         UnitManager Victim = (UnitManager)mUnit.GetCurrentOpponent().GetComponent("UnitManager");
-        if (Vector3.Distance(Unit.transform.position, Victim.transform.position) > 0.3 || Victim.Health <= 0)
+        if (Unit.GetDistance(unit.transform.position, Victim.transform.position) > 0.3 || Victim.Health <= 0)
             mUnit.SetFighting(false);
         else
         {
             yield return new WaitForSeconds(mUnit.AttackSpeed);
-            Debug.Log($"{Unit.tag} Attacking");
+            Debug.Log($"{unit.tag} Attacking");
             Victim.Health -= mUnit.Damage;
-            textMeshProUGUI.text = "-"+mUnit.Damage.ToString();
-            Instantiate(textMeshProUGUI, Victim.transform, false);
-            Victim.SayOuch();
+            UnitManager.SayOuch();
         }
         AttackUnitRun = false;
     }

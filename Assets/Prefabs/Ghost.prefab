@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3614988951150362069}
   - component: {fileID: 3614988951150361897}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Ghost
   m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mUnit: {fileID: 0}
-  IsEnemy: 1
+  IsEnemy: 0
   UnitType: Ghost
   Health: 0
 --- !u!50 &3614988951150362069

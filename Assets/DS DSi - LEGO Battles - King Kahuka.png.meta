@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 14a43879ff586a24c96b2129b984043a
+guid: b8721e2ce5840834ca054460230ae831
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -70,7 +70,7 @@ TextureImporter:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
-    resizeAlgorithm: 1
+    resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
@@ -107,34 +107,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: DS DSi - LEGO Battles - King Buildings_0
+      name: DS DSi - LEGO Battles - King Kahuka_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 40
-        width: 56
-        height: 56
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a213a80654d99644b9e82c2b4a596a70
-      internalID: 1434414084
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: DS DSi - LEGO Battles - King Buildings_1
-      rect:
-        serializedVersion: 2
-        x: 432
-        y: 40
-        width: 39
-        height: 56
+        y: 56
+        width: 24
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -142,8 +121,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ecfe3df6e3879654fa8d9bab361cbe61
-      internalID: 813403832
+      spriteID: 7ef9fbd7ddedb1a4babf3617f12c21a5
+      internalID: -1859249698
       vertices: []
       indices: 
       edges: []
@@ -159,8 +138,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      DS DSi - LEGO Battles - King Buildings_0: 1434414084
-      DS DSi - LEGO Battles - King Buildings_1: 813403832
+      DS DSi - LEGO Battles - King Kahuka_0: -1859249698
   spritePackingTag: 
   pSDRemoveMatte: 0
   userData: 

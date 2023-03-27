@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEditor.Purchasing;
@@ -15,6 +16,7 @@ public class TreeManager : MonoBehaviour
     Ability ability;
     List<GameObject> ButtonsGO;
     TextMeshProUGUI Info;
+    public GameObject[] abilitybuttons;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,7 +32,7 @@ public class TreeManager : MonoBehaviour
         //}
     }
 
-    private void Update()
+    void Update()
     {
         //for (int i = 0; i < Abilities.Count; i++)
         //{
@@ -49,6 +51,13 @@ public class TreeManager : MonoBehaviour
         //        }
         //    }
         //}
+        for (int i = 0; i < Abilities.Count; i++)
+        {
+            if (Abilities[i].unlocked)
+                abilitybuttons[i].SetActive(true);
+            else
+                abilitybuttons[i].SetActive(false);
+        }
     }
 
     public void BuildTree()

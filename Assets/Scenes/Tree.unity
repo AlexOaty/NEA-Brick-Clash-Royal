@@ -1403,6 +1403,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 84dcddfc6a8cb6741a0221b9174311ab, type: 2}
   - {fileID: 11400000, guid: 6b3d9684b7d633540b8062b3720aeb0e, type: 2}
   - {fileID: 11400000, guid: 3ee1344a999126f43a0f804087ce1f75, type: 2}
+  abilitybuttons:
+  - {fileID: 917945567}
+  - {fileID: 1204186558}
+  - {fileID: 544713662}
 --- !u!1 &1973206413
 GameObject:
   m_ObjectHideFlags: 0
