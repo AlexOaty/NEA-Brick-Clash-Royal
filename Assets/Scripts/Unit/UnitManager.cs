@@ -71,6 +71,7 @@ public class UnitManager : MonoBehaviour
             {
                 if (unittype.name == gameObject.name.Split()[0] && unittype.name == "Castle")
                 {
+                    GameManager.GameEnd = true;
                     GameObject gameend = Instantiate(text, Camera.main.WorldToScreenPoint(Vector3.zero), Quaternion.identity);
                     gameend.transform.parent = TextCanvas.transform;
                     gameend.GetComponent<TextMeshProUGUI>().fontSize = 60;
