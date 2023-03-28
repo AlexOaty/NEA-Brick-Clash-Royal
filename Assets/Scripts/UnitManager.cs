@@ -71,12 +71,25 @@ public class UnitManager : MonoBehaviour
             {
                 if (unittype.name == gameObject.name.Split()[0] && unittype.name == "Castle")
                 {
+                    GameObject gameend = Instantiate(text, Camera.main.WorldToScreenPoint(Vector3.zero), Quaternion.identity);
+                    gameend.transform.parent = TextCanvas.transform;
+                    gameend.GetComponent<TextMeshProUGUI>().fontSize = 60;
+                    gameend.GetComponent<TextMeshProUGUI>().fontWeight = TMPro.FontWeight.Bold;
+                    gameend.GetComponent<RectTransform>().sizeDelta = new Vector2(200, 200);
+                    GameObject[] AllUnits = GameObject.FindGameObjectsWithTag("Unit");
+                    foreach (GameObject Unit in AllUnits)
+                        Destroy(Unit);
+
                     if (!IsEnemy)
                     {
+                        gameend.GetComponent<TextMeshProUGUI>().text = "YOU LOSE";
+                        gameend.GetComponent<TextMeshProUGUI>().color = Color.red;
                         Debug.Log("YOU LOST");
                     }
                     else
                     {
+                        gameend.GetComponent<TextMeshProUGUI>().text = "YOU WIN";
+                        gameend.GetComponent<TextMeshProUGUI>().color = Color.green;
                         Debug.Log("YOU WIN");
                     }
 
