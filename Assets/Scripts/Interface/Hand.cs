@@ -18,24 +18,29 @@ public class Hand
 
     public void Play(GameObject Unit)
     {
+        UnitPlayed = Unit;
         for (int i = 0; i < Data.Count; i++)
         {
             if (Data[i] == Unit)
             {
                 Data[i] = null;
                 Index = i;
-                UnitPlayed = RemoveCard();
-                Add(UnitPlayed);
+                RemoveCard();
             }
         }
     }
 
-    public GameObject RemoveCard()
+    public void RemoveCard()
     {
-        for (int i = Index; i < Data.Count - Index; i++)
-            Data[i - 1] = Data[i];
-
-        return UnitPlayed;
+        for (int i = Index; i < Data.Count; i++)
+        {
+            if (i != Data.Count - 1)
+                Data[i] = Data[i + 1];
+            else
+            {
+                Data[i] = UnitPlayed;
+            }
+        }
     }
 
     public void Add(GameObject Card)
