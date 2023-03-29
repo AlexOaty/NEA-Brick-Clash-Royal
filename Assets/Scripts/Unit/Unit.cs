@@ -278,11 +278,4 @@ public class Unit : ScriptableObject
     {
         return FightingUnit;
     }
-
-
-
-    //public void AttackUnit()
-    //{
-    //    Debug.Log($"{Unit.tag} Attacking");
-    //}
 }
