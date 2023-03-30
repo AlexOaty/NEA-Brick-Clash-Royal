@@ -29,7 +29,7 @@ public class LoginRegister : MonoBehaviour
 
     public void Register()
     {
-        string[] info = text.text.Split("/n");
+        string[] info = text.text.Split("\n");
         foreach (string line in info)
         {
             string[] strings = line.Split(',');
