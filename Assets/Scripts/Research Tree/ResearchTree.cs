@@ -7,15 +7,10 @@ using UnityEngine;
 public class ResearchTree : ScriptableObject
 {
     public List<Ability> Data;
-    Ability Root;
-    Ability Current;
-
 
     public ResearchTree(List<Ability> Data)
     {
         this.Data = Data;
-        Root = Data[0];
-        Current = Root;
     }
 
     public Ability Purchase(string Ability)
