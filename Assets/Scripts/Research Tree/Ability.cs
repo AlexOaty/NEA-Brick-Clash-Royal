@@ -10,7 +10,6 @@ public class Ability : ScriptableObject
     public string ID;
     public string attribute;
     public float change;
-    public int cost;
     public bool unlocked;
     public bool purchased;
     public string LeftID;

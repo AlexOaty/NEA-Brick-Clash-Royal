@@ -63,13 +63,14 @@ public class GameManager : MonoBehaviour
         BrickAdding = false;
         StartCoroutine("StartCards");
     }
+
     void StartCards()
     {
         hand.CreateHand(Deck);
         StartCoroutine("AttackPhase");
     }
 
-void AttackPhase()
+    void AttackPhase()
     {
         GameObject NewUnit = null;
         int Cost = 0;
