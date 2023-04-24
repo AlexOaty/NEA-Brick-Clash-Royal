@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,17 +18,20 @@ public class GameManager : MonoBehaviour
     float CurrentTime;
     public float BrickNum;
     public Button Spawner;
-    public GameObject[] Deck;
     public GameObject Tower;
     public GameObject EnemyUnit;
+    public GameObject[] Deck;
     public TextMeshProUGUI Bricks;
     public TextMeshProUGUI PlayerCastleHealth;
     public TextMeshProUGUI EnemyCastleHealth;
     public TextMeshProUGUI Timer;
+    public GameObject ToUpgrader;
     public static bool GameEnd;
 
     void Start()
+    //Finds both the player castle and the enemy castle by searching for the tag "Castle" in all active GameObjects
     {
+        ToUpgrader.SetActive(false);
         GameEnd = false;
         GameObject[] Castles = GameObject.FindGameObjectsWithTag("Castle");
         foreach (GameObject Castle in Castles)
@@ -59,16 +63,14 @@ public class GameManager : MonoBehaviour
         BrickAdding = false;
         StartCoroutine("StartCards");
     }
+
     void StartCards()
     {
-        for (int i = 0; i<Deck.Length; i++)
-        {
-            hand.Add(Deck[i]);
-        }
+        hand.CreateHand(Deck);
         StartCoroutine("AttackPhase");
     }
 
-void AttackPhase()
+    void AttackPhase()
     {
         GameObject NewUnit = null;
         int Cost = 0;
@@ -129,6 +131,10 @@ void AttackPhase()
             {
                 StartCoroutine("AddBrick");
             }
+        }
+        else
+        {
+            ToUpgrader.SetActive(true);
         }
     }
 

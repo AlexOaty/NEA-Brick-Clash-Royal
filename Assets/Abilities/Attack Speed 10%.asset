@@ -17,7 +17,7 @@ MonoBehaviour:
   change: 0.1
   cost: 40
   unlocked: 1
-  purchased: 1
+  purchased: 0
   LeftID: Health1
   RightID: Speed1
   left: 1

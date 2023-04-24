@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class Hand
 {
-    List<GameObject> Data;
+    GameObject[] Data;
     GameObject UnitPlayed;
     int Index;
 
     public Hand()
     {
-        Data = new List<GameObject>();
+        Data = new GameObject[4];
         Index = 0;
         UnitPlayed = null;
     }
@@ -19,36 +19,34 @@ public class Hand
     public void Play(GameObject Unit)
     {
         UnitPlayed = Unit;
-        for (int i = 0; i < Data.Count; i++)
+        for (int i = 0; i < Data.Length; i++)
         {
             if (Data[i] == Unit)
             {
                 Data[i] = null;
                 Index = i;
-                RemoveCard();
+                MoveToBack();
             }
         }
     }
 
-    public void RemoveCard()
+    public void MoveToBack()
     {
-        for (int i = Index; i < Data.Count; i++)
+        for (int i = Index; i < Data.Length; i++)
         {
-            if (i != Data.Count - 1)
+            if (i != Data.Length - 1)
                 Data[i] = Data[i + 1];
             else
-            {
                 Data[i] = UnitPlayed;
-            }
         }
     }
 
-    public void Add(GameObject Card)
+    public void CreateHand(GameObject[] hand)
     {
-        Data.Add(Card);
+        Data = hand;
     }
 
-    public List<GameObject> GetData()
+    public GameObject[] GetData()
     {
         return Data;
     }
