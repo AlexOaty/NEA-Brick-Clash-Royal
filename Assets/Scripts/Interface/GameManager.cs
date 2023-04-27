@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,25 +10,38 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     GameObject Canvas;
-    public float BrickNum;
-    bool BrickAdding;
-    public Button Spawner;
     UnitsDatabase UnitTypes;
-    public GameObject[] Deck;
+    UnitManager PlayerCastle;
+    UnitManager EnemyCastle;
+    Hand hand;
+    bool BrickAdding;
+    float CurrentTime;
+    public float BrickNum;
+    public Button Spawner;
     public GameObject Tower;
     public GameObject EnemyUnit;
-    public UnitManager PlayerCastle;
-    public UnitManager EnemyCastle;
+    public GameObject[] Deck;
     public TextMeshProUGUI Bricks;
     public TextMeshProUGUI PlayerCastleHealth;
     public TextMeshProUGUI EnemyCastleHealth;
     public TextMeshProUGUI Timer;
-    List<GameObject> Hand;
-    float CurrentTime;
+    public GameObject ToUpgrader;
+    public static bool GameEnd;
 
     void Start()
+    //Finds both the player castle and the enemy castle by searching for the tag "Castle" in all active GameObjects
     {
-        Hand = new List<GameObject>();
+        ToUpgrader.SetActive(false);
+        GameEnd = false;
+        GameObject[] Castles = GameObject.FindGameObjectsWithTag("Castle");
+        foreach (GameObject Castle in Castles)
+        {
+            if (!Castle.GetComponent<UnitManager>().IsEnemy)
+                PlayerCastle = Castle.GetComponent<UnitManager>();
+            else
+                EnemyCastle = Castle.GetComponent<UnitManager>();
+        }
+        hand = new Hand();
         UnitTypes = GameObject.FindGameObjectWithTag("UnitTypes").GetComponent<UnitsDatabase>();
         Canvas = GameObject.FindGameObjectWithTag("Canvas");
         BrickNum = 2;
@@ -49,16 +63,14 @@ public class GameManager : MonoBehaviour
         BrickAdding = false;
         StartCoroutine("StartCards");
     }
+
     void StartCards()
     {
-        for (int i = 0; i<Deck.Length; i++)
-        {
-            Hand.Add(Deck[i]);
-        }
+        hand.CreateHand(Deck);
         StartCoroutine("AttackPhase");
     }
 
-void AttackPhase()
+    void AttackPhase()
     {
         GameObject NewUnit = null;
         int Cost = 0;
@@ -68,7 +80,7 @@ void AttackPhase()
 
         for (int i = 0; i < 3; i++)
         {
-            NewUnit = Hand[i];
+            NewUnit = hand.GetData()[i];
             foreach (Unit unittype in UnitTypes.units)
             {
                 if (unittype.name == NewUnit.name)
@@ -84,12 +96,15 @@ void AttackPhase()
 
     void EnemySpawner()
     {
-        System.Random Rand = new System.Random();
-        int Side = Rand.Next(2);
-        if (Side == 1)
-            Instantiate(EnemyUnit, new Vector3(-0.341f, 0.7f), Quaternion.identity);
-        else
-            Instantiate(EnemyUnit, new Vector3(0.41f, 0.6f), Quaternion.identity);
+        if (!GameEnd)
+        {
+            System.Random Rand = new System.Random();
+            int Side = Rand.Next(2);
+            if (Side == 1)
+                Instantiate(EnemyUnit, new Vector3(-0.341f, 0.7f), Quaternion.identity);
+            else
+                Instantiate(EnemyUnit, new Vector3(0.41f, 0.6f), Quaternion.identity);
+        }
     }
 
     Button AddButton(float x, float y, GameObject Unit)
@@ -102,16 +117,24 @@ void AttackPhase()
     // Update is called once per frame
     void Update()
     {
-        if (CurrentTime > 0)
+        if (!GameEnd)
         {
-            CurrentTime -= Time.deltaTime;
+            if (CurrentTime > 0)
+            {
+                CurrentTime -= Time.deltaTime;
+            }
+            Timer.text = CurrentTime.ToString();
+            Bricks.text = "Bricks: " + BrickNum.ToString();
+            PlayerCastleHealth.text = "Castle Health: " + PlayerCastle.Health.ToString();
+            EnemyCastleHealth.text = "Castle Health: " + EnemyCastle.Health.ToString();
+            if (BrickNum < 5 && !BrickAdding)
+            {
+                StartCoroutine("AddBrick");
+            }
         }
-        Timer.text = CurrentTime.ToString();
-        Bricks.text = "Bricks: " + BrickNum.ToString();
-        PlayerCastleHealth.text = "Castle Health: " + PlayerCastle.Health.ToString();
-        if(BrickNum<5 && !BrickAdding) 
+        else
         {
-            StartCoroutine("AddBrick");
+            ToUpgrader.SetActive(true);
         }
     }
 
@@ -125,8 +148,7 @@ void AttackPhase()
 
     public void MoveToBack(GameObject Button)
     {
-        Hand.Remove(Button);
+        hand.Play(Button);
         StartCoroutine("AttackPhase");
-        Hand.Add(Button);
     }
 }

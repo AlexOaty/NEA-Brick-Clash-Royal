@@ -123,20 +123,20 @@ public class Unit : ScriptableObject
             }
         }
     }
-    private void FindBounds()
-    {
-        //Finds the top and bottom of the path
-        if (PathBounds[0].transform.position.y < 0)
-        {
-            Top = PathBounds[1];
-            Bottom = PathBounds[0];
-        }
-        else
-        {
-            Top = PathBounds[0];
-            Bottom = PathBounds[1];
-        }
-    }
+    //private void FindBounds()
+    //{
+    //    //Finds the top and bottom of the path
+    //    if (PathBounds[0].transform.position.y < 0)
+    //    {
+    //        Top = PathBounds[1];
+    //        Bottom = PathBounds[0];
+    //    }
+    //    else
+    //    {
+    //        Top = PathBounds[0];
+    //        Bottom = PathBounds[1];
+    //    }
+    //}
     public bool CheckEnemies()
     {
         //Checks the units area for any enemy units and stops the unit if they are in range
@@ -278,11 +278,4 @@ public class Unit : ScriptableObject
     {
         return FightingUnit;
     }
-
-
-
-    //public void AttackUnit()
-    //{
-    //    Debug.Log($"{Unit.tag} Attacking");
-    //}
 }
